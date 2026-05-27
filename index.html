@@ -2017,34 +2017,32 @@ function removeBan(i){
   toast('✅','Бан снят','');
 }
 
-// ─ Admin Design ─
-function renderAdminDesign(){
-  document.getElementById('color-gold').value = D.design.gold;
-  document.getElementById('color-red').value = D.design.red;
-  document.getElementById('color-accent').value = D.design.accent;
-  document.getElementById('design-slogan').value = D.design.slogan;
-  document.getElementById('design-copy').value = D.design.copy;
-}
-function previewColor(which, val){
-  const map = {gold:'--gold',red:'--red',accent:'--accent'};
-  if(map[which]) document.documentElement.style.setProperty(map[which], val);
-}
-function saveDesign(){
-  D.design.gold = document.getElementById('color-gold').value;
-  D.design.red = document.getElementById('color-red').value;
-  D.design.accent = document.getElementById('color-accent').value;
-  D.design.slogan = document.getElementById('design-slogan').value;
-  D.design.copy = document.getElementById('design-copy').value;
-  save('design');
-  applyDesign();
-  document.getElementById('hero-sub').textContent = D.design.slogan;
-  document.getElementById('footer-copy').textContent = D.design.copy;
-  const m=document.getElementById('design-msg');m.style.display='block';setTimeout(()=>m.style.display='none',3000);
-  toast('🎨','Дизайн применён','Изменения сохранены');
-}
-
+</script>
 // ════════════════════
 init();
+</script>
+<!-- Конфигурация Firebase -->
+<script type="module">
+  // Импорт нужных функций из SDK
+  import { initializeApp } from "https://gstatic.com";
+  import { getAnalytics } from "https://gstatic.com";
+
+  // Ваш конфиг (данные, которые вы предоставили)
+  const firebaseConfig = {
+    apiKey: "AIzaSyApLkfkP7ekQkQHL0fHkJCYFKzBgGcrXJQ",
+    authDomain: "extazyforum.firebaseapp.com",
+    projectId: "extazyforum",
+    storageBucket: "extazyforum.firebasestorage.app",
+    messagingSenderId: "747328457235",
+    appId: "1:747328457235:web:67804837547d256c768de6",
+    measurementId: "G-8XCNJ1BFYW"
+  };
+
+  // Инициализация Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+  
+  console.log("Firebase успешно подключен!");
 </script>
 </body>
 </html>

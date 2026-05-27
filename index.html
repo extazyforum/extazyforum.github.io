@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EXTAZY RP — Официальный Форум</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Exo+2:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:#f0a500;--gold2:#ffcc44;--red:#e8192c;--dark:#07080d;--dark2:#0d0f1a;
+  --dark3:#111420;--dark4:#161928;--card:#12152080;--border:#ffffff10;
+  --border2:#f0a50030;--text:#e8e8f0;--muted:#7878a0;--accent:#00d4ff;
+  --green:#4ade80;--purple:#a855f7;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Exo 2',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* ── BLOBS ── */
+.blobs{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.blob{position:absolute;border-radius:50%;filter:blur(130px);animation:bFloat 20s ease-in-out infinite alternate;}
+.b1{width:700px;height:700px;background:radial-gradient(#e8192c,#6e40ff);top:-200px;left:-200px;opacity:.14;animation-delay:0s;}
+.b2{width:500px;height:500px;background:radial-gradient(#f0a500,#ff4400);bottom:-100px;right:-100px;opacity:.12;animation-delay:-7s;}
+.b3{width:400px;height:400px;background:radial-gradient(#00d4ff,#6e40ff);top:40%;left:55%;opacity:.1;animation-delay:-14s;}
+@keyframes bFloat{0%{transform:translate(0,0) scale(1);}50%{transform:translate(30px,-50px) scale(1.07);}100%{transform:translate(-20px,30px) scale(.96);}}
+body::before{content:'';position:fixed;inset:0;z-index:1;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.022;}
+
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:#07080dee;backdrop-filter:blur(24px);border-bottom:1px solid var(--border2);}
+.hdr{max-width:1440px;margin:0 auto;display:flex;align-items:center;gap:24px;padding:0 28px;height:66px;}
+.logo{font-family:'Bebas Neue';font-size:26px;letter-spacing:3px;background:linear-gradient(135deg,var(--gold),var(--red),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;cursor:pointer;flex-shrink:0;text-decoration:none;}
+.hnav{display:flex;gap:2px;flex:1;}
+.hnav a{color:var(--muted);text-decoration:none;font-size:12px;font-weight:600;padding:5px 12px;border-radius:6px;letter-spacing:.8px;text-transform:uppercase;transition:all .2s;cursor:pointer;white-space:nowrap;}
+.hnav a:hover,.hnav a.act{color:var(--gold);background:#f0a50012;}
+.hright{display:flex;align-items:center;gap:10px;margin-left:auto;flex-shrink:0;}
+.obadge{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--green);background:#4ade8015;border:1px solid #4ade8030;padding:5px 12px;border-radius:20px;}
+.odot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+.btn{font-family:'Rajdhani';font-size:13px;font-weight:700;padding:7px 18px;border-radius:7px;border:none;cursor:pointer;letter-spacing:1px;text-transform:uppercase;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+.btn-o{background:transparent;border:1px solid var(--border2);color:var(--gold);}
+.btn-o:hover{background:var(--border2);}
+.btn-g{background:linear-gradient(135deg,var(--gold),#ff8c00);color:#000;box-shadow:0 0 20px #f0a50030;}
+.btn-g:hover{transform:translateY(-1px);box-shadow:0 4px 30px #f0a50060;}
+.btn-r{background:linear-gradient(135deg,var(--red),#8b0000);color:#fff;}
+.btn-gr{background:linear-gradient(135deg,#22c55e,#16a34a);color:#fff;}
+.btn-gy{background:#1a1d2e;color:var(--muted);border:1px solid var(--border);}
+.btn-gy:hover{border-color:var(--border2);color:var(--text);}
+.btn-sm{font-size:11px;padding:5px 12px;}
+.btn-xs{font-size:11px;padding:4px 10px;}
+
+/* ── TICKER ── */
+.ticker{background:linear-gradient(90deg,#1a0200,#0e0000,#1a0200);border-bottom:1px solid #ff000025;overflow:hidden;height:34px;display:flex;align-items:center;position:relative;z-index:99;}
+.tk-label{background:#e8192c;padding:0 16px;font-family:'Bebas Neue';font-size:13px;letter-spacing:2px;height:100%;display:flex;align-items:center;flex-shrink:0;border-right:2px solid #ff000040;}
+.tk-wrap{overflow:hidden;flex:1;}
+.tk-track{display:flex;gap:48px;animation:tkMove 35s linear infinite;white-space:nowrap;}
+.tk-track span{font-size:11px;font-weight:500;letter-spacing:.4px;opacity:.85;}
+.tk-sep{color:var(--gold);}
+@keyframes tkMove{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+/* ── PAGE ── */
+.page{position:relative;z-index:2;max-width:1440px;margin:0 auto;padding:28px;}
+
+/* ── HERO ── */
+.hero{position:relative;border-radius:18px;overflow:hidden;margin-bottom:28px;min-height:220px;display:flex;align-items:flex-end;background:linear-gradient(135deg,#0d0f1a,#1a0a00 50%,#0d0f1a);border:1px solid var(--border2);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(240,165,0,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(240,165,0,.07) 1px,transparent 1px);background-size:44px 44px;mask-image:linear-gradient(to bottom,transparent,black 40%,black 60%,transparent);}
+.hero-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,#e8192c15,transparent 60%),radial-gradient(ellipse at 80% 50%,#f0a50015,transparent 60%);}
+.hero-cnt{position:relative;padding:36px 44px;flex:1;}
+.hero-tag{font-family:'Bebas Neue';font-size:10px;letter-spacing:4px;color:var(--gold);margin-bottom:6px;}
+.hero-ttl{font-family:'Bebas Neue';font-size:clamp(38px,5vw,68px);letter-spacing:2px;line-height:1;background:linear-gradient(135deg,#fff,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;}
+.hero-sub{font-size:13px;color:var(--muted);max-width:460px;line-height:1.6;}
+.hero-stats{display:flex;gap:28px;margin-top:20px;}
+.hs-num{font-family:'Bebas Neue';font-size:30px;color:var(--gold);line-height:1;}
+.hs-lbl{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+
+/* ── STATS ROW ── */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+.sbox{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 18px;text-align:center;transition:border-color .2s;}
+.sbox:hover{border-color:var(--border2);}
+.sbox-n{font-family:'Bebas Neue';font-size:34px;background:linear-gradient(135deg,var(--gold2),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;}
+.sbox-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+
+/* ── GRID ── */
+.mgrid{display:grid;grid-template-columns:1fr 320px;gap:22px;align-items:start;}
+.ccol{display:flex;flex-direction:column;gap:22px;}
+.scol{display:flex;flex-direction:column;gap:18px;}
+
+/* ── SECTION HEAD ── */
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.st{font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;display:flex;align-items:center;gap:10px;}
+.st::before{content:'';display:block;width:4px;height:18px;border-radius:2px;background:linear-gradient(to bottom,var(--gold),var(--red));}
+.sm{font-size:11px;color:var(--muted);text-decoration:none;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;cursor:pointer;}
+.sm:hover{color:var(--gold);}
+
+/* ── CAT GRID ── */
+.catg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;}
+.ccat{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;text-decoration:none;display:block;}
+.ccat::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--cc,linear-gradient(90deg,var(--gold),var(--red)));opacity:0;transition:opacity .25s;}
+.ccat:hover{border-color:var(--border2);transform:translateY(-2px);background:#161928cc;}
+.ccat:hover::before{opacity:1;}
+.ci{font-size:26px;margin-bottom:8px;display:block;}
+.cn{font-family:'Rajdhani';font-size:15px;font-weight:700;margin-bottom:3px;letter-spacing:.5px;}
+.cd{font-size:11px;color:var(--muted);line-height:1.4;}
+.cc{margin-top:10px;font-size:10px;color:var(--muted);display:flex;gap:10px;}
+
+/* ── TOPICS ── */
+.tlist{display:flex;flex-direction:column;gap:7px;}
+.titem{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;cursor:pointer;transition:all .2s;text-decoration:none;}
+.titem:hover{border-color:var(--border2);background:#161928cc;transform:translateX(3px);}
+.titem.pinned{border-left:3px solid var(--gold);}
+.titem.hot{border-left:3px solid var(--red);}
+.tava{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.ttop{display:flex;align-items:center;gap:7px;margin-bottom:3px;flex-wrap:wrap;}
+.tname{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:380px;}
+.tmeta{font-size:11px;color:var(--muted);}
+.tmeta span{margin-right:10px;}
+.tst{text-align:right;flex-shrink:0;}
+.tr{font-family:'Rajdhani';font-size:20px;font-weight:700;}
+.trl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── TAGS ── */
+.tag{font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap;}
+.tag-pin{background:#f0a50020;color:var(--gold);border:1px solid var(--border2);}
+.tag-hot{background:#e8192c20;color:#ff6b6b;border:1px solid #e8192c30;}
+.tag-new{background:#00d4ff20;color:#00d4ff;border:1px solid #00d4ff30;}
+.tag-cl{background:#ffffff08;color:var(--muted);border:1px solid var(--border);}
+.tag-sol{background:#4ade8020;color:#4ade80;border:1px solid #4ade8030;}
+.tag-pend{background:#fbbf2420;color:#fbbf24;border:1px solid #fbbf2430;}
+.tag-rej{background:#f8717120;color:#f87171;border:1px solid #f8717130;}
+
+/* ── ANNOUNCE ── */
+.ann{background:linear-gradient(135deg,#1a0800,#0d0f1a);border:1px solid var(--border2);border-radius:12px;padding:18px 22px;display:flex;align-items:center;gap:18px;position:relative;overflow:hidden;}
+.ann::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(to bottom,var(--gold),var(--red));}
+.ann-ic{font-size:34px;flex-shrink:0;}
+.ann-t{font-family:'Rajdhani';font-size:17px;font-weight:700;color:var(--gold);margin-bottom:3px;letter-spacing:.4px;}
+.ann-tx{font-size:12px;color:var(--muted);line-height:1.5;}
+.ann-act{margin-left:auto;flex-shrink:0;}
+
+/* ── SIDE CARDS ── */
+.scard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;}
+.sct{font-family:'Bebas Neue';font-size:15px;letter-spacing:2px;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.sct::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,var(--border2),transparent);}
+
+/* ── SERVERS ── */
+.svl{display:flex;flex-direction:column;gap:9px;}
+.svr{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;border-radius:8px;background:#0d0f1a80;border:1px solid var(--border);}
+.svi{display:flex;align-items:center;gap:8px;}
+.svd{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.dg{background:#4ade80;box-shadow:0 0 8px #4ade80;}.dy{background:#fbbf24;box-shadow:0 0 8px #fbbf24;}.dr{background:#f87171;box-shadow:0 0 8px #f87171;}
+.svn{font-size:12px;font-weight:600;}.svm{font-size:10px;color:var(--muted);}
+.svbw{flex:1;margin:0 10px;height:3px;background:var(--border);border-radius:2px;overflow:hidden;}
+.svb{height:100%;border-radius:2px;transition:width 1s ease;}
+.bg{background:linear-gradient(90deg,#4ade80,#22c55e);}.by{background:linear-gradient(90deg,#fbbf24,#f59e0b);}.br{background:linear-gradient(90deg,#f87171,#ef4444);}
+.svp{font-size:11px;font-weight:600;white-space:nowrap;}
+
+/* ── EVENTS ── */
+.evl{display:flex;flex-direction:column;gap:9px;}
+.evi{display:flex;gap:10px;align-items:center;padding:9px;border-radius:8px;background:#0d0f1a80;border:1px solid var(--border);transition:all .2s;cursor:pointer;}
+.evi:hover{border-color:var(--border2);}
+.evd{background:linear-gradient(135deg,var(--gold),#ff8c00);border-radius:6px;padding:5px 9px;text-align:center;flex-shrink:0;}
+.evday{font-family:'Bebas Neue';font-size:20px;color:#000;line-height:1;}
+.evmon{font-size:8px;font-weight:700;color:#000;letter-spacing:1px;}
+.evt{font-size:12px;font-weight:600;margin-bottom:1px;}
+.evs{font-size:10px;color:var(--muted);}
+
+/* ── ACTIVITY ── */
+.actl{display:flex;flex-direction:column;gap:10px;}
+.acti{display:flex;gap:9px;align-items:flex-start;}
+.acta{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.actx{flex:1;line-height:1.5;color:var(--muted);font-size:11px;}
+.actx strong{color:var(--text);font-weight:600;}
+.actt{font-size:10px;color:var(--muted);margin-top:1px;}
+
+/* ── PAGINATION ── */
+.pag{display:flex;gap:5px;justify-content:center;margin-top:14px;}
+.pbtn{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;font-family:'Rajdhani';font-weight:600;}
+.pbtn:hover{border-color:var(--border2);color:var(--gold);}
+.pbtn.act{background:var(--border2);border-color:var(--gold);color:var(--gold);}
+
+/* ── SEARCH ── */
+.swrap{position:relative;flex:1;max-width:320px;}
+.sinp{width:100%;background:#0d0f1a;border:1px solid var(--border);border-radius:8px;padding:7px 12px 7px 34px;color:var(--text);font-size:12px;outline:none;transition:border-color .2s;font-family:'Exo 2';}
+.sinp::placeholder{color:var(--muted);}
+.sinp:focus{border-color:var(--border2);}
+.sico{position:absolute;left:10px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:13px;}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;z-index:500;background:#000000cc;backdrop-filter:blur(8px);align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:var(--dark2);border:1px solid var(--border2);border-radius:16px;padding:36px;width:420px;max-width:95vw;animation:fup .3s ease;max-height:90vh;overflow-y:auto;}
+.modal h2{font-family:'Bebas Neue';font-size:28px;letter-spacing:3px;color:var(--gold);margin-bottom:4px;text-align:center;}
+.modal p{font-size:12px;color:var(--muted);margin-bottom:20px;text-align:center;}
+.ifield{width:100%;background:#0d0f1a;border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:13px;outline:none;margin-bottom:10px;font-family:'Exo 2';transition:border-color .2s;}
+.ifield:focus{border-color:var(--border2);}
+.ifield-sel{appearance:none;background:#0d0f1a url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238888aa' d='M6 8L1 3h10z'/%3E%3C/svg%3E") no-repeat right 12px center;}
+.lerr{color:#f87171;font-size:11px;margin-bottom:6px;display:none;}
+.modal-row{display:flex;gap:8px;margin-bottom:10px;}
+.modal-close{position:absolute;top:16px;right:16px;background:transparent;border:none;color:var(--muted);font-size:20px;cursor:pointer;padding:4px;}
+
+/* ── NEWS PAGE ── */
+.news-list{display:flex;flex-direction:column;gap:16px;}
+.news-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;cursor:pointer;transition:all .25s;text-decoration:none;display:block;}
+.news-card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.news-banner{height:140px;background:linear-gradient(135deg,#1a0800,#0a0d1a);display:flex;align-items:center;justify-content:center;font-size:48px;position:relative;overflow:hidden;}
+.news-banner-glow{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,#f0a50020,transparent 70%);}
+.news-body{padding:16px 18px;}
+.news-cat{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.news-title{font-family:'Rajdhani';font-size:16px;font-weight:700;margin-bottom:6px;line-height:1.3;}
+.news-excerpt{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;}
+.news-meta{font-size:11px;color:var(--muted);display:flex;gap:12px;align-items:center;}
+.news-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* ── COMPLAINTS PAGE ── */
+.comp-form{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:20px;}
+.comp-form h3{font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;color:var(--gold);margin-bottom:16px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.comp-cards{display:flex;flex-direction:column;gap:10px;}
+.ccard{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s;}
+.ccard:hover{border-color:var(--border2);}
+.ccard-hd{padding:14px 18px;display:flex;align-items:center;gap:14px;cursor:pointer;}
+.ccard.exp .ccard-hd{border-bottom:1px solid var(--border);}
+.cdot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.dnew{background:#00d4ff;box-shadow:0 0 8px #00d4ff;}.dreview{background:#fbbf24;box-shadow:0 0 8px #fbbf24;}.dsolved{background:#4ade80;box-shadow:0 0 8px #4ade80;}.drejected{background:#f87171;box-shadow:0 0 8px #f87171;}
+.cinfo{flex:1;min-width:0;}
+.ctitle{font-size:13px;font-weight:600;margin-bottom:2px;}
+.cmeta{font-size:11px;color:var(--muted);}
+.cexp{color:var(--muted);font-size:16px;transition:transform .3s;flex-shrink:0;}
+.ccard.exp .cexp{transform:rotate(180deg);}
+.cbody{padding:18px;display:none;}
+.ccard.exp .cbody{display:block;}
+.ctxt{font-size:12px;color:var(--text);line-height:1.7;background:#0d0f1a80;border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:14px;}
+.cevid{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;}
+.evtag{font-size:10px;background:#00d4ff10;border:1px solid #00d4ff30;color:#00d4ff;padding:3px 9px;border-radius:4px;}
+.cresp{margin-bottom:14px;}
+.cresp-t{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.ritem{background:#0d0f1a80;border-left:3px solid var(--gold);border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:7px;}
+.ritem.adm{border-left-color:var(--red);}
+.rauth{font-size:11px;font-weight:600;color:var(--gold);margin-bottom:3px;}
+.ritem.adm .rauth{color:#f87171;}
+.rtxt{font-size:12px;color:var(--text);line-height:1.5;}
+.rtime{font-size:10px;color:var(--muted);margin-top:3px;}
+.cactions{display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;}
+.rta{flex:1;min-width:180px;background:#0d0f1a;border:1px solid var(--border);border-radius:8px;padding:9px 12px;color:var(--text);font-size:12px;outline:none;resize:vertical;min-height:70px;font-family:'Exo 2';transition:border-color .2s;}
+.rta:focus{border-color:var(--border2);}
+.actbtns{display:flex;gap:6px;flex-wrap:wrap;}
+.comp-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.cfbtn{background:#12152080;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11px;font-weight:600;padding:5px 12px;cursor:pointer;transition:all .2s;letter-spacing:.5px;text-transform:uppercase;font-family:'Exo 2';}
+.cfbtn.act{background:#f0a50015;border-color:var(--gold);color:var(--gold);}
+
+/* ── ADMIN PANEL ── */
+.apanel{display:none;position:fixed;inset:0;z-index:600;background:var(--dark);overflow-y:auto;}
+.apanel.open{display:block;}
+.ahdr{background:#0d0f1a;border-bottom:1px solid var(--border2);padding:0 28px;height:62px;display:flex;align-items:center;gap:20px;position:sticky;top:0;z-index:10;}
+.alogo{font-family:'Bebas Neue';font-size:22px;letter-spacing:3px;color:var(--gold);}
+.abadge{background:#e8192c20;border:1px solid #e8192c40;color:#f87171;font-size:10px;font-weight:700;padding:2px 9px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;}
+.anav{display:flex;gap:3px;flex:1;overflow-x:auto;}
+.anbtn{background:transparent;border:none;color:var(--muted);cursor:pointer;font-size:11px;font-weight:600;padding:5px 12px;border-radius:6px;letter-spacing:.6px;text-transform:uppercase;transition:all .2s;font-family:'Exo 2';white-space:nowrap;}
+.anbtn:hover,.anbtn.act{color:var(--gold);background:#f0a50012;}
+.acnt{max-width:1200px;margin:0 auto;padding:28px;}
+.astats{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-bottom:28px;}
+.asc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;transition:all .2s;cursor:default;}
+.asc:hover{border-color:var(--border2);}
+.ascn{font-family:'Bebas Neue';font-size:38px;color:var(--gold);line-height:1;}
+.ascl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:3px;}
+.asci{font-size:22px;margin-bottom:6px;}
+.tab-c{display:none;}.tab-c.act{display:block;}
+.acard{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:22px;margin-bottom:18px;}
+.acard h3{font-family:'Bebas Neue';font-size:18px;letter-spacing:2px;color:var(--gold);margin-bottom:16px;}
+.acard h4{font-family:'Rajdhani';font-size:14px;font-weight:700;color:var(--text);margin-bottom:10px;margin-top:16px;}
+.irow{display:flex;gap:10px;align-items:center;margin-bottom:10px;}
+.irow label{font-size:12px;color:var(--muted);min-width:130px;}
+.rinp{flex:1;accent-color:var(--gold);}
+.rprev{font-family:'Bebas Neue';font-size:26px;color:var(--gold);min-width:60px;text-align:center;}
+.save-msg{color:var(--green);font-size:12px;margin-top:8px;display:none;}
+.users-table{width:100%;border-collapse:collapse;}
+.users-table th{text-align:left;font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;padding:8px 12px;border-bottom:1px solid var(--border);}
+.users-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:12px;vertical-align:middle;}
+.users-table tr:last-child td{border-bottom:none;}
+.urole{font-size:9px;font-weight:700;padding:2px 8px;border-radius:12px;letter-spacing:.5px;text-transform:uppercase;}
+.role-owner{background:#ff44ff20;color:#ff44ff;border:1px solid #ff44ff40;}
+.role-co-owner{background:#a855f720;color:#a855f7;border:1px solid #a855f740;}
+.role-admin{background:#e8192c20;color:#f87171;border:1px solid #e8192c30;}
+.role-moder{background:#f0a50020;color:var(--gold);border:1px solid var(--border2);}
+.role-helper{background:#00d4ff20;color:#00d4ff;border:1px solid #00d4ff40;}
+.role-user{background:#ffffff08;color:var(--muted);border:1px solid var(--border);}
+.role-banned{background:#f8717120;color:#f87171;border:1px solid #f8717130;text-decoration:line-through;}
+.news-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+.textarea-lg{width:100%;background:#0d0f1a;border:1px solid var(--border);border-radius:8px;padding:11px 14px;color:var(--text);font-size:12px;outline:none;resize:vertical;min-height:100px;font-family:'Exo 2';transition:border-color .2s;margin-bottom:10px;}
+.textarea-lg:focus{border-color:var(--border2);}
+.news-admin-list{display:flex;flex-direction:column;gap:8px;margin-top:14px;}
+.nal{display:flex;align-items:center;gap:12px;background:#0d0f1a80;border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.nal-info{flex:1;}
+.nal-t{font-size:13px;font-weight:600;margin-bottom:2px;}
+.nal-m{font-size:11px;color:var(--muted);}
+.ticker-admin{display:flex;flex-direction:column;gap:8px;}
+.tick-item{display:flex;align-items:center;gap:10px;background:#0d0f1a80;border:1px solid var(--border);border-radius:8px;padding:10px 12px;}
+.tick-item span{flex:1;font-size:12px;}
+.banner-preview{background:linear-gradient(135deg,#1a0800,#07080d);border:1px solid var(--border2);border-radius:10px;padding:14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;}
+.color-picker{width:36px;height:36px;border-radius:6px;border:1px solid var(--border);cursor:pointer;padding:2px;}
+
+/* ── NEWS FULL ── */
+.news-full{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;}
+.nf-cat{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;}
+.nf-title{font-family:'Rajdhani';font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.3;}
+.nf-meta{font-size:11px;color:var(--muted);margin-bottom:16px;display:flex;gap:14px;}
+.nf-body{font-size:13px;color:var(--text);line-height:1.8;white-space:pre-wrap;}
+.nf-body p{margin-bottom:10px;}
+.back-link{display:inline-flex;align-items:center;gap:6px;color:var(--muted);font-size:12px;cursor:pointer;margin-bottom:18px;transition:color .2s;background:none;border:none;font-family:'Exo 2';}
+.back-link:hover{color:var(--gold);}
+
+/* ── PROFILE ── */
+.profile-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px;display:flex;gap:20px;align-items:flex-start;}
+.pava{width:80px;height:80px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:36px;flex-shrink:0;border:2px solid var(--border2);}
+.pname{font-family:'Rajdhani';font-size:20px;font-weight:700;margin-bottom:4px;}
+.prole-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:12px;letter-spacing:.5px;text-transform:uppercase;display:inline-block;margin-bottom:8px;}
+.pstats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px;}
+.pstat{background:#0d0f1a80;border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;}
+.pstn{font-family:'Bebas Neue';font-size:22px;color:var(--gold);line-height:1;}
+.pstl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;right:22px;z-index:9999;background:#161928;border:1px solid var(--border2);border-radius:12px;padding:13px 16px;display:flex;align-items:center;gap:11px;font-size:12px;box-shadow:0 8px 32px #00000070;animation:fup .4s ease;max-width:280px;}
+.toast-ic{font-size:18px;}
+.toast-t{font-weight:600;margin-bottom:2px;color:var(--gold);font-size:12px;}
+.toast-m{color:var(--muted);font-size:11px;}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:2;margin-top:48px;border-top:1px solid var(--border);background:#07080d;padding:40px 28px 20px;}
+.finner{max-width:1440px;margin:0 auto;}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px;}
+.flogo{font-family:'Bebas Neue';font-size:28px;letter-spacing:3px;margin-bottom:10px;}
+.flogo span{background:linear-gradient(135deg,var(--gold),var(--red),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.fdesc{font-size:12px;color:var(--muted);line-height:1.7;max-width:260px;}
+.fsoc{display:flex;gap:8px;margin-top:18px;}
+.sbtn{width:34px;height:34px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--muted);display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;transition:all .2s;text-decoration:none;}
+.sbtn:hover{border-color:var(--border2);color:var(--gold);background:var(--border2);}
+.fcol-t{font-family:'Rajdhani';font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;}
+.flinks{display:flex;flex-direction:column;gap:7px;}
+.flinks a{font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;cursor:pointer;}
+.flinks a:hover{color:var(--gold);}
+.fbot{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid var(--border);font-size:11px;color:var(--muted);}
+
+/* ── MISC ── */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--dark);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:#f0a50060;}
+@keyframes fup{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.fade{animation:fup .5s ease forwards;}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--border),transparent);margin:20px 0;}
+.empty{text-align:center;color:var(--muted);padding:36px;font-size:13px;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+input[type="color"]{border:none;cursor:pointer;}
+.warn-box{background:#e8192c10;border:1px solid #e8192c30;border-radius:8px;padding:12px 14px;font-size:12px;color:#f87171;margin-bottom:12px;}
+
+@media(max-width:1024px){.mgrid{grid-template-columns:1fr;}.scol{order:-1;}.stats-row{grid-template-columns:repeat(2,1fr);}.fgrid{grid-template-columns:1fr 1fr;}.astats{grid-template-columns:repeat(3,1fr);}}
+@media(max-width:640px){.page{padding:14px;}.hdr{padding:0 14px;}.hnav{display:none;}.stats-row{grid-template-columns:repeat(2,1fr);}.catg{grid-template-columns:repeat(2,1fr);}.fgrid{grid-template-columns:1fr;}.astats{grid-template-columns:repeat(2,1fr);}.news-grid{grid-template-columns:1fr;}.form-row{grid-template-columns:1fr;}.news-form-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+
+<!-- BLOBS -->
+<div class="blobs"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div></div>
+
+<!-- ╔═══════════════╗ -->
+<!-- ║    HEADER     ║ -->
+<!-- ╚═══════════════╝ -->
+<header>
+  <div class="hdr">
+    <span class="logo" onclick="showPage('home')">EXTAZY RP</span>
+    <nav class="hnav">
+      <a onclick="showPage('home')" id="nav-home" class="act">Форум</a>
+      <a onclick="showPage('news')" id="nav-news">Новости</a>
+      <a onclick="showPage('complaints')" id="nav-complaints">Жалобы</a>
+      <a onclick="showPage('rules')" id="nav-rules">Правила</a>
+      <a onclick="showPage('banlist')" id="nav-banlist">Банлист</a>
+    </nav>
+    <div class="hright">
+      <div class="swrap">
+        <span class="sico">🔍</span>
+        <input class="sinp" type="text" placeholder="Поиск по форуму..." id="search-inp" oninput="doSearch(this.value)">
+      </div>
+      <div class="obadge">
+        <div class="odot"></div>
+        <span id="hdr-online"><strong id="hdr-onum">—</strong>&nbsp;онлайн</span>
+      </div>
+      <div id="hdr-user-area">
+        <button class="btn btn-o" onclick="openModal('login-modal')">Войти</button>
+        <button class="btn btn-g" onclick="openModal('reg-modal')">Регистрация</button>
+      </div>
+      <div id="hdr-logged" style="display:none;align-items:center;gap:8px;">
+        <span id="hdr-username" style="font-size:12px;color:var(--muted);"></span>
+        <button class="btn btn-gy btn-sm" onclick="openProfile()">👤 Профиль</button>
+        <button class="btn btn-r btn-sm" id="admin-btn" style="display:none;" onclick="openAdmin()">⚙️ Админка</button>
+        <button class="btn btn-gy btn-sm" onclick="logout()">Выйти</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="tk-label">🔴 LIVE</div>
+  <div class="tk-wrap">
+    <div class="tk-track" id="ticker-track">
+      <span id="tick1">🎮 Сервер EXTAZY RP работает</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick2">📢 Читайте правила форума</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick3">🏆 Новый ивент каждую пятницу!</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick4">💬 Подавайте жалобы через форум</span>
+      <span class="tk-sep">✦</span>
+      <!-- duplicate for infinite scroll -->
+      <span id="tick1b">🎮 Сервер EXTAZY RP работает</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick2b">📢 Читайте правила форума</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick3b">🏆 Новый ивент каждую пятницу!</span>
+      <span class="tk-sep">✦</span>
+      <span id="tick4b">💬 Подавайте жалобы через форум</span>
+      <span class="tk-sep">✦</span>
+    </div>
+  </div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║         HOME PAGE            ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-home">
+
+  <!-- HERO -->
+  <div class="hero fade">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">— Добро пожаловать на официальный форум —</div>
+      <div class="hero-ttl">EXTAZY RP</div>
+      <div class="hero-sub" id="hero-sub">Лучший GTA5 RP сервер. Объединяем игроков каждый день. Живи игрой — создавай историю.</div>
+      <div class="hero-stats">
+        <div><div class="hs-num" id="hs-players">—</div><div class="hs-lbl">Игроков</div></div>
+        <div><div class="hs-num">1</div><div class="hs-lbl">Сервер</div></div>
+        <div><div class="hs-num" id="hs-online">—</div><div class="hs-lbl">Онлайн</div></div>
+        <div><div class="hs-num" id="hs-year">2025</div><div class="hs-lbl">Год запуска</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row fade">
+    <div class="sbox"><div class="sbox-n" id="st-msgs">—</div><div class="sbox-l">Сообщений</div></div>
+    <div class="sbox"><div class="sbox-n" id="st-topics">—</div><div class="sbox-l">Тем</div></div>
+    <div class="sbox"><div class="sbox-n" id="st-users">—</div><div class="sbox-l">Пользователей</div></div>
+    <div class="sbox"><div class="sbox-n" id="st-online">—</div><div class="sbox-l">Сейчас онлайн</div></div>
+  </div>
+
+  <!-- MAIN GRID -->
+  <div class="mgrid">
+    <div class="ccol">
+
+      <!-- ANNOUNCEMENT -->
+      <div class="ann fade" id="home-ann">
+        <div class="ann-ic" id="ann-icon">📢</div>
+        <div>
+          <div class="ann-t" id="ann-title">Добро пожаловать на EXTAZY RP!</div>
+          <div class="ann-tx" id="ann-text">Форум официально открыт. Читайте правила, участвуйте в жизни сообщества.</div>
+        </div>
+        <div class="ann-act"><button class="btn btn-g" style="font-size:11px;padding:7px 14px;" onclick="showPage('news')">Читать</button></div>
+      </div>
+
+      <!-- CATEGORIES -->
+      <div class="fade">
+        <div class="sh"><div class="st">Разделы форума</div><span class="sm" onclick="showPage('complaints')">Жалобы →</span></div>
+        <div class="catg" id="cat-grid">
+          <div class="ccat" onclick="showPage('rules')" style="--cc:linear-gradient(90deg,#e8192c,#ff6b00)">
+            <span class="ci">📋</span><div class="cn">Правила сервера</div><div class="cd">Обязательно прочти перед игрой</div><div class="cc"><span>📌 6</span><span>👁 14K</span></div>
+          </div>
+          <div class="ccat" onclick="showPage('news')" style="--cc:linear-gradient(90deg,#f0a500,#ff8c00)">
+            <span class="ci">📣</span><div class="cn">Новости</div><div class="cd">Обновления и анонсы проекта</div><div class="cc"><span>📌 <span id="cat-news-c">0</span></span><span>👁 32K</span></div>
+          </div>
+          <div class="ccat" onclick="showPage('complaints')" style="--cc:linear-gradient(90deg,#00d4ff,#6e40ff)">
+            <span class="ci">🆘</span><div class="cn">Жалобы</div><div class="cd">Нарушители и репорты</div><div class="cc"><span>💬 <span id="cat-comp-c">0</span></span><span>✅ <span id="cat-comp-s">0</span></span></div>
+          </div>
+          <div class="ccat" onclick="showPage('banlist')" style="--cc:linear-gradient(90deg,#f59e0b,#ec4899)">
+            <span class="ci">🎯</span><div class="cn">Апелляции</div><div class="cd">Обжалование банов</div><div class="cc"><span>💬 <span id="cat-ban-c">0</span></span><span>✅ 41</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HOT TOPICS -->
+      <div class="fade">
+        <div class="sh"><div class="st">Горячие темы</div><span class="sm" onclick="showPage('complaints')">Все жалобы →</span></div>
+        <div class="tlist" id="hot-topics"></div>
+      </div>
+
+    </div>
+
+    <!-- SIDE -->
+    <div class="scol">
+      <!-- SERVER STATUS -->
+      <div class="scard">
+        <div class="sct">🖥️ Сервер</div>
+        <div class="svl">
+          <div class="svr">
+            <div class="svi"><div class="svd dg"></div><div><div class="svn" id="sv1-name">Основной</div><div class="svm">San Andreas</div></div></div>
+            <div class="svbw"><div class="svb bg" id="sv1-bar" style="width:0%"></div></div>
+            <div class="svp"><span id="sv1-pop">—</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENTS -->
+      <div class="scard">
+        <div class="sct">🎯 События</div>
+        <div class="evl" id="events-list"></div>
+      </div>
+
+      <!-- RECENT ACTIVITY -->
+      <div class="scard">
+        <div class="sct">⚡ Активность</div>
+        <div class="actl" id="activity-list"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║         NEWS PAGE            ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-news" style="display:none;">
+  <div class="sh" style="margin-bottom:20px;"><div class="st">📣 Новости & Анонсы</div></div>
+  <div id="news-content"></div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║       COMPLAINTS PAGE        ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-complaints" style="display:none;">
+  <div class="sh" style="margin-bottom:6px;"><div class="st">🆘 Жалобы</div></div>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:18px;">Подавайте жалобы на игроков, сотрудников и обжалуйте баны. Ответ в течение 24 часов.</p>
+
+  <!-- COMPLAINT FORM -->
+  <div class="comp-form">
+    <h3>📝 Подать жалобу</h3>
+    <div id="comp-login-warn" class="warn-box" style="display:none;">⚠️ Для подачи жалобы необходимо <strong style="cursor:pointer;color:var(--gold);" onclick="openModal('login-modal')">войти в аккаунт</strong>.</div>
+    <div id="comp-form-body">
+      <div class="form-row">
+        <select class="ifield ifield-sel" id="comp-cat">
+          <option value="">— Категория —</option>
+          <option>Жалоба на игрока</option>
+          <option>Жалоба на администратора</option>
+          <option>Жалоба на сотрудника LSPD</option>
+          <option>Жалоба на сотрудника EMS</option>
+          <option>Апелляция на бан</option>
+          <option>Апелляция на предупреждение</option>
+          <option>Другое</option>
+        </select>
+        <input class="ifield" type="text" id="comp-accused" placeholder="Ник обвиняемого (необязательно)">
+      </div>
+      <input class="ifield" type="text" id="comp-title" placeholder="Заголовок жалобы *">
+      <textarea class="textarea-lg" id="comp-text" placeholder="Подробное описание ситуации. Укажите дату, время, место события, свидетелей. Чем подробнее — тем быстрее рассмотрим. *"></textarea>
+      <input class="ifield" type="text" id="comp-evidence" placeholder="Доказательства: скриншоты, видео, ссылки (через запятую)">
+      <div style="display:flex;justify-content:flex-end;gap:8px;">
+        <button class="btn btn-g" onclick="submitComplaint()">📩 Отправить жалобу</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILTERS -->
+  <div class="comp-filters">
+    <button class="cfbtn act" onclick="filterComp('all',this)">Все</button>
+    <button class="cfbtn" onclick="filterComp('new',this)">🔵 Новые</button>
+    <button class="cfbtn" onclick="filterComp('review',this)">🟡 На рассмотрении</button>
+    <button class="cfbtn" onclick="filterComp('solved',this)">🟢 Решённые</button>
+    <button class="cfbtn" onclick="filterComp('rejected',this)">🔴 Отклонённые</button>
+  </div>
+
+  <div class="comp-cards" id="comp-list"></div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║         RULES PAGE           ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-rules" style="display:none;">
+  <div class="sh" style="margin-bottom:20px;"><div class="st">📋 Правила сервера</div></div>
+  <div class="news-full" id="rules-content"></div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║         BANLIST PAGE         ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-banlist" style="display:none;">
+  <div class="sh" style="margin-bottom:20px;"><div class="st">🚫 Банлист</div></div>
+  <div class="acard">
+    <table class="users-table" id="banlist-table">
+      <thead><tr><th>Игрок</th><th>Причина</th><th>Дата</th><th>До</th><th>Выдал</th></tr></thead>
+      <tbody id="banlist-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ╔═══════════════════════════════╗ -->
+<!-- ║        PROFILE PAGE          ║ -->
+<!-- ╚═══════════════════════════════╝ -->
+<div class="page" id="pg-profile" style="display:none;">
+  <div class="sh" style="margin-bottom:20px;"><div class="st">👤 Мой профиль</div></div>
+  <div id="profile-content"></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="finner">
+    <div class="fgrid">
+      <div>
+        <div class="flogo"><span>EXTAZY RP</span></div>
+        <div class="fdesc" id="footer-desc">Лучший GTA5 RP-сервер. Живи в мире, который сам создаёшь.</div>
+        <div class="fsoc">
+          <a class="sbtn" title="Discord">💬</a>
+          <a class="sbtn" title="VK">📱</a>
+          <a class="sbtn" title="Telegram">✈️</a>
+          <a class="sbtn" title="YouTube">▶️</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcol-t">Форум</div>
+        <div class="flinks">
+          <a onclick="showPage('home')">Главная</a>
+          <a onclick="showPage('news')">Новости</a>
+          <a onclick="showPage('complaints')">Жалобы</a>
+          <a onclick="showPage('rules')">Правила</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcol-t">Игра</div>
+        <div class="flinks">
+          <a>Как зайти</a>
+          <a>Карта сервера</a>
+          <a>Топ фракции</a>
+          <a>Обновления</a>
+        </div>
+      </div>
+      <div>
+        <div class="fcol-t">Помощь</div>
+        <div class="flinks">
+          <a onclick="showPage('banlist')">Банлист</a>
+          <a onclick="showPage('complaints')">Апелляция</a>
+          <a>FAQ</a>
+          <a>Поддержка</a>
+        </div>
+      </div>
+    </div>
+    <div class="fbot">
+      <span id="footer-copy">© 2025 EXTAZY RP. Все права защищены.</span>
+      <span>Не официальный GTA Online. Модификация GTA V.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════ -->
+<!--              MODALS                        -->
+<!-- ══════════════════════════════════════════ -->
+
+<!-- LOGIN -->
+<div class="overlay" id="login-modal" onclick="closeModalOutside(event,'login-modal')">
+  <div class="modal">
+    <h2>Вход</h2>
+    <p>Войдите в аккаунт EXTAZY RP</p>
+    <div class="lerr" id="login-err">Неверный логин или пароль</div>
+    <input class="ifield" type="text" id="login-user" placeholder="Никнейм или Email" autocomplete="username">
+    <input class="ifield" type="password" id="login-pass" placeholder="Пароль" autocomplete="current-password">
+    <button class="btn btn-g" style="width:100%;justify-content:center;" onclick="doLogin()">Войти</button>
+    <div class="divider"></div>
+    <p style="margin:0;font-size:12px;color:var(--muted);text-align:center;">Нет аккаунта? <strong style="color:var(--gold);cursor:pointer;" onclick="closeModal('login-modal');openModal('reg-modal')">Зарегистрироваться</strong></p>
+  </div>
+</div>
+
+<!-- REGISTER -->
+<div class="overlay" id="reg-modal" onclick="closeModalOutside(event,'reg-modal')">
+  <div class="modal">
+    <h2>Регистрация</h2>
+    <p>Создайте аккаунт на форуме EXTAZY RP</p>
+    <div class="lerr" id="reg-err"></div>
+    <input class="ifield" type="text" id="reg-user" placeholder="Никнейм (только латиница, цифры, _)" autocomplete="username">
+    <input class="ifield" type="email" id="reg-email" placeholder="Email" autocomplete="email">
+    <input class="ifield" type="password" id="reg-pass" placeholder="Пароль (мин. 6 символов)" autocomplete="new-password">
+    <input class="ifield" type="password" id="reg-pass2" placeholder="Повторите пароль" autocomplete="new-password">
+    <button class="btn btn-g" style="width:100%;justify-content:center;" onclick="doRegister()">Зарегистрироваться</button>
+    <div class="divider"></div>
+    <p style="margin:0;font-size:12px;color:var(--muted);text-align:center;">Уже есть аккаунт? <strong style="color:var(--gold);cursor:pointer;" onclick="closeModal('reg-modal');openModal('login-modal')">Войти</strong></p>
+  </div>
+</div>
+
+<!-- ADMIN PASSWORD MODAL -->
+<div class="overlay" id="admin-pass-modal" onclick="closeModalOutside(event,'admin-pass-modal')">
+  <div class="modal" style="max-width:380px;">
+    <div style="text-align:center;margin-bottom:16px;">
+      <div style="font-size:36px;">🔐</div>
+      <h2 style="margin:8px 0 4px;">Доступ к панели</h2>
+      <p style="font-size:12px;color:var(--muted);">Введите пароль администратора</p>
+    </div>
+    <div class="lerr" id="apass-err">Неверный пароль</div>
+    <input class="ifield" type="password" id="admin-pass-inp" placeholder="Пароль панели управления" onkeydown="if(event.key==='Enter')checkAdminPass()">
+    <label style="display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);cursor:pointer;margin-top:-4px;">
+      <input type="checkbox" id="admin-pass-remember" style="width:14px;height:14px;accent-color:var(--gold);">
+      Запомнить на этом устройстве (7 дней)
+    </label>
+    <button class="btn btn-g" style="width:100%;justify-content:center;margin-top:12px;" onclick="checkAdminPass()">🔓 Войти в панель</button>
+    <button class="btn btn-gy" style="width:100%;justify-content:center;margin-top:6px;" onclick="closeModal('admin-pass-modal')">Отмена</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--            ADMIN PANEL                     -->
+<!-- ══════════════════════════════════════════ -->
+<div class="apanel" id="admin-panel">
+  <div class="ahdr">
+    <div class="alogo">⚙️ ADMIN</div>
+    <div class="abadge">ПАНЕЛЬ УПРАВЛЕНИЯ</div>
+    <div id="admin-role-badge" style="font-size:11px;font-weight:700;padding:3px 12px;border-radius:20px;letter-spacing:.5px;"></div>
+    <div class="anav" id="admin-nav-tabs">
+      <!-- вкладки рендерятся динамически в зависимости от роли -->
+    </div>
+    <button class="btn btn-r btn-sm" onclick="closeAdmin()">✕ Закрыть</button>
+  </div>
+
+  <div class="acnt">
+    <!-- STATS -->
+    <div class="astats" id="admin-stats-row"></div>
+
+    <!-- DASHBOARD -->
+    <div class="tab-c act" id="tab-dashboard">
+      <div class="acard" style="padding:10px 18px;">
+        <div id="dash-last-login" style="font-size:12px;color:var(--muted);"></div>
+      </div>
+      <div class="acard">
+        <h3>📊 Статистика форума</h3>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;" id="dash-grid"></div>
+      </div>
+      <div class="acard">
+        <h3>🕐 Последние жалобы</h3>
+        <div id="dash-recent-comp"></div>
+      </div>
+      <div class="acard">
+        <h3>👥 Последние регистрации</h3>
+        <div id="dash-recent-users"></div>
+      </div>
+    </div>
+
+    <!-- COMPLAINTS -->
+    <div class="tab-c" id="tab-complaints">
+      <div class="comp-filters" style="margin-bottom:14px;">
+        <button class="cfbtn act" onclick="aFilterComp('all',this)">Все</button>
+        <button class="cfbtn" onclick="aFilterComp('new',this)">🔵 Новые</button>
+        <button class="cfbtn" onclick="aFilterComp('review',this)">🟡 Рассмотрение</button>
+        <button class="cfbtn" onclick="aFilterComp('solved',this)">🟢 Решённые</button>
+        <button class="cfbtn" onclick="aFilterComp('rejected',this)">🔴 Отклонённые</button>
+      </div>
+      <div class="comp-cards" id="admin-comp-list"></div>
+    </div>
+
+    <!-- NEWS -->
+    <div class="tab-c" id="tab-news">
+      <div class="acard">
+        <h3>✏️ Добавить новость</h3>
+        <div class="news-form-grid">
+          <input class="ifield" type="text" id="na-title" placeholder="Заголовок новости *">
+          <select class="ifield ifield-sel" id="na-cat">
+            <option>Обновление</option><option>Анонс</option><option>Ивент</option><option>Важно</option><option>Патч-ноут</option>
+          </select>
+        </div>
+        <input class="ifield" type="text" id="na-icon" placeholder="Иконка (эмодзи, например 🎮)">
+        <textarea class="textarea-lg" id="na-text" placeholder="Полный текст новости..."></textarea>
+        <button class="btn btn-g" onclick="addNews()">➕ Опубликовать</button>
+      </div>
+      <div class="acard">
+        <h3>📋 Список новостей</h3>
+        <div class="news-admin-list" id="admin-news-list"></div>
+      </div>
+    </div>
+
+    <!-- USERS -->
+    <div class="tab-c" id="tab-users">
+      <div class="acard">
+        <h3>👥 Управление пользователями</h3>
+        <div style="margin-bottom:12px;display:flex;gap:8px;">
+          <input class="ifield" style="margin:0;flex:1;" type="text" id="user-search" placeholder="Поиск пользователя..." oninput="renderAdminUsers()">
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="users-table">
+            <thead><tr><th>Никнейм</th><th>Email</th><th>Роль</th><th>Зарегистрирован</th><th>Жалоб</th><th>Действия</th></tr></thead>
+            <tbody id="admin-users-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SERVER -->
+    <div class="tab-c" id="tab-server">
+      <div class="acard">
+        <h3>🖥️ Настройки сервера</h3>
+        <div class="irow"><label>Онлайн игроков</label><input type="range" class="rinp" min="0" max="300" id="sv-online-r" oninput="document.getElementById('sv-online-p').textContent=this.value"><div class="rprev" id="sv-online-p">—</div></div>
+        <div class="irow"><label>Максимум игроков</label><input class="ifield" style="margin:0;width:140px;" type="number" id="sv-max-i" min="1" max="1000"><span style="font-size:12px;color:var(--muted);">мест</span></div>
+        <div class="irow"><label>Всего игроков</label><input class="ifield" style="margin:0;width:140px;" type="number" id="sv-total-i"><span style="font-size:12px;color:var(--muted);">зарегистрировано</span></div>
+        <div class="irow"><label>Имя сервера</label><input class="ifield" style="margin:0;flex:1;" type="text" id="sv-name-i"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+          <button class="btn btn-gy btn-sm" onclick="svQuick(50)">50</button>
+          <button class="btn btn-gy btn-sm" onclick="svQuick(100)">100</button>
+          <button class="btn btn-gy btn-sm" onclick="svQuick(150)">150</button>
+          <button class="btn btn-gy btn-sm" onclick="svQuick(200)">200</button>
+          <button class="btn btn-gy btn-sm" onclick="svQuick(250)">250</button>
+        </div>
+        <div style="margin-top:12px;"><button class="btn btn-g" onclick="saveServer()">💾 Сохранить</button><div class="save-msg" id="sv-msg">✅ Сохранено!</div></div>
+        <h4>📊 Статистика форума</h4>
+        <div class="grid2">
+          <div class="irow"><label>Сообщений</label><input class="ifield" style="margin:0;flex:1;" type="text" id="st-msg-i"></div>
+          <div class="irow"><label>Тем</label><input class="ifield" style="margin:0;flex:1;" type="text" id="st-top-i"></div>
+        </div>
+        <button class="btn btn-gy btn-sm" onclick="saveStats()">💾 Обновить статистику</button><div class="save-msg" id="st-msg">✅ Сохранено!</div>
+      </div>
+    </div>
+
+    <!-- TICKER -->
+    <div class="tab-c" id="tab-ticker">
+      <div class="acard">
+        <h3>📡 Бегущая строка</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px;">Управляйте 4 строками тикера вверху страницы.</p>
+        <div class="ticker-admin" id="ticker-admin"></div>
+        <div style="margin-top:14px;"><button class="btn btn-g" onclick="saveTicker()">💾 Сохранить</button><div class="save-msg" id="tick-msg">✅ Сохранено!</div></div>
+      </div>
+    </div>
+
+    <!-- ANNOUNCE -->
+    <div class="tab-c" id="tab-announce">
+      <div class="acard">
+        <h3>📢 Объявление на главной</h3>
+        <input class="ifield" type="text" id="ann-icon-i" placeholder="Иконка (эмодзи)">
+        <input class="ifield" type="text" id="ann-title-i" placeholder="Заголовок объявления">
+        <textarea class="textarea-lg" id="ann-text-i" placeholder="Текст объявления..."></textarea>
+        <div class="banner-preview">
+          <div style="font-size:32px;" id="ann-prev-ic">📢</div>
+          <div><div style="font-family:'Rajdhani';font-size:16px;font-weight:700;color:var(--gold);" id="ann-prev-t">Заголовок</div><div style="font-size:11px;color:var(--muted);" id="ann-prev-tx">Текст объявления</div></div>
+        </div>
+        <button class="btn btn-g" onclick="saveAnnounce()">💾 Сохранить</button><div class="save-msg" id="ann-msg">✅ Сохранено!</div>
+      </div>
+    </div>
+
+    <!-- RULES -->
+    <div class="tab-c" id="tab-rules">
+      <div class="acard">
+        <h3>📋 Редактор правил</h3>
+        <textarea class="textarea-lg" style="min-height:300px;" id="rules-editor" placeholder="Введите правила сервера..."></textarea>
+        <button class="btn btn-g" onclick="saveRules()">💾 Сохранить</button><div class="save-msg" id="rules-msg">✅ Сохранено!</div>
+      </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="tab-c" id="tab-events">
+      <div class="acard">
+        <h3>🎯 Добавить событие</h3>
+        <div class="grid2">
+          <input class="ifield" type="text" id="ev-title" placeholder="Название события *">
+          <input class="ifield" type="text" id="ev-desc" placeholder="Описание">
+        </div>
+        <div class="grid2">
+          <input class="ifield" type="number" id="ev-day" placeholder="День (1-31)" min="1" max="31">
+          <input class="ifield" type="text" id="ev-mon" placeholder="Месяц (напр. МАЯ)">
+        </div>
+        <button class="btn btn-g" onclick="addEvent()">➕ Добавить</button>
+      </div>
+      <div class="acard">
+        <h3>📋 Список событий</h3>
+        <div id="admin-events-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+    </div>
+
+    <!-- BANLIST -->
+    <div class="tab-c" id="tab-banlist">
+      <div class="acard">
+        <h3>🚫 Добавить в банлист</h3>
+        <div class="grid2">
+          <input class="ifield" type="text" id="ban-nick" placeholder="Никнейм *">
+          <input class="ifield" type="text" id="ban-reason" placeholder="Причина бана *">
+        </div>
+        <div class="grid2">
+          <input class="ifield" type="text" id="ban-until" placeholder="До (напр. Перманентно)">
+          <input class="ifield" type="text" id="ban-by" placeholder="Выдал (ник админа)">
+        </div>
+        <button class="btn btn-r" onclick="addBan()">🚫 Заблокировать</button>
+      </div>
+      <div class="acard">
+        <h3>📋 Активные баны</h3>
+        <div style="overflow-x:auto;">
+          <table class="users-table">
+            <thead><tr><th>Игрок</th><th>Причина</th><th>Дата</th><th>До</th><th>Выдал</th><th></th></tr></thead>
+            <tbody id="admin-ban-body"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- DESIGN -->
+    <div class="tab-c" id="tab-design">
+      <div class="acard">
+        <h3>🎨 Настройки дизайна</h3>
+        <div class="irow"><label>Акцентный цвет (золото)</label><input type="color" class="color-picker" id="color-gold" value="#f0a500" oninput="previewColor('gold',this.value)"></div>
+        <div class="irow"><label>Акцентный цвет (красный)</label><input type="color" class="color-picker" id="color-red" value="#e8192c" oninput="previewColor('red',this.value)"></div>
+        <div class="irow"><label>Акцент (синий)</label><input type="color" class="color-picker" id="color-accent" value="#00d4ff" oninput="previewColor('accent',this.value)"></div>
+        <div class="irow"><label>Слоган на главной</label><input class="ifield" style="margin:0;flex:1;" type="text" id="design-slogan" placeholder="Текст под заголовком..."></div>
+        <div class="irow"><label>Копирайт в футере</label><input class="ifield" style="margin:0;flex:1;" type="text" id="design-copy" placeholder="© 2025 EXTAZY RP"></div>
+        <button class="btn btn-g" onclick="saveDesign()" style="margin-top:8px;">💾 Применить</button><div class="save-msg" id="design-msg">✅ Применено!</div>
+      </div>
+    </div>
+
+    <!-- LOGS -->
+    <div class="tab-c" id="tab-logs">
+      <div class="acard">
+        <h3>📜 Логи действий</h3>
+        <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap;">
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('all',this)" id="log-btn-all" style="border-color:var(--gold);color:var(--gold);">Все</button>
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('role',this)">👑 Роли</button>
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('ban',this)">🚫 Баны</button>
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('complaint',this)">🆘 Жалобы</button>
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('news',this)">📣 Новости</button>
+          <button class="btn btn-gy btn-sm" onclick="filterLogs('login',this)">🔐 Входы</button>
+          <button class="btn btn-r btn-sm" onclick="clearLogs()" style="margin-left:auto;">🗑️ Очистить</button>
+        </div>
+        <div id="logs-list" style="display:flex;flex-direction:column;gap:6px;max-height:540px;overflow-y:auto;"></div>
+      </div>
+    </div>
+<div class="toast" id="toast" style="display:none;">
+  <div class="toast-ic" id="toast-ic">✅</div>
+  <div><div class="toast-t" id="toast-t">Заголовок</div><div class="toast-m" id="toast-m">Сообщение</div></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!--                   JAVASCRIPT                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<script>
+// ─── STORAGE HELPERS ───
+const S = {
+  get:(k,def)=>{ try{const v=localStorage.getItem('erp_'+k);return v===null?def:JSON.parse(v);}catch{return def;}},
+  set:(k,v)=>{ try{localStorage.setItem('erp_'+k,JSON.stringify(v));}catch{} }
+};
+
+// ─── DEFAULT DATA ───
+const DEFAULTS = {
+  server:{online:127,max:300,total:4821,name:'Основной'},
+  stats:{msgs:'12.4K',topics:'847'},
+  announce:{icon:'📢',title:'Добро пожаловать на EXTAZY RP!',text:'Форум официально открыт. Читайте правила, участвуйте в жизни сообщества.'},
+  rules:`ПРАВИЛА СЕРВЕРА EXTAZY RP
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+§1. ОБЩИЕ ПОЛОЖЕНИЯ
+1.1 Регистрируясь на сервере, вы автоматически соглашаетесь с настоящими правилами.
+1.2 Незнание правил не освобождает от ответственности.
+1.3 Администрация вправе изменять правила без предварительного уведомления.
+
+§2. РОЛЕВАЯ ИГРА
+2.1 Всегда оставайтесь в роли (IC). Выход из роли (OOC) только в крайних случаях.
+2.2 Запрещён мэтагейминг — использование внеигровой информации в игре.
+2.3 Запрещён пауэргейминг — принуждение игроков к действиям без их согласия.
+2.4 Уважайте других игроков и их отыгрыш.
+
+§3. ЗАПРЕЩЕНО
+3.1 Читерство, использование модификаций с преимуществом.
+3.2 Оскорбления, угрозы, дискриминация.
+3.3 Реклама сторонних проектов.
+3.4 Торговля игровыми ценностями за реальные деньги (без разрешения администрации).
+3.5 Grief-игра — целенаправленное разрушение игрового процесса других.
+
+§4. ФРАКЦИИ И ОРГАНИЗАЦИИ
+4.1 Фракции создаются с разрешения администрации.
+4.2 Лидер фракции несёт ответственность за поведение членов.
+4.3 Войны между фракциями требуют согласования с администрацией.
+
+§5. ОТВЕТСТВЕННОСТЬ
+5.1 За нарушение правил: предупреждение → временный бан → перманентный бан.
+5.2 Баны и предупреждения можно обжаловать через раздел «Жалобы».
+5.3 Решение администрации окончательно.`,
+  tickers:['🎮 Добро пожаловать на EXTAZY RP — лучший GTA5 RP сервер!','📢 Читайте правила форума перед игрой','🏆 Новый ивент каждую пятницу! Следите за новостями','💬 Подавайте жалобы через соответствующий раздел форума'],
+  events:[{day:'30',mon:'МАЯ',title:'Ивент: Гонки в горах',desc:'Приз — 500K$'},{day:'1',mon:'ИЮН',title:'День открытых дверей',desc:'Набор в фракции'},{day:'7',mon:'ИЮН',title:'Рейд банды SHADOW',desc:'Военная операция'}],
+  news:[
+    {id:1,icon:'🎮',cat:'Обновление',title:'Крупное обновление 2.5 — новые фракции и механики',excerpt:'В этом обновлении мы добавили 3 новые фракции, переработали систему экономики и исправили более 50 багов.',text:`Друзья, рады представить масштабное обновление 2.5!
+
+Что нового:
+• Добавлены фракции: Cartel Norte, Shadow Ops, Corporate Mafia
+• Переработана экономическая система — теперь баланс более честный
+• Новые транспортные средства: 12 машин, 3 мотоцикла
+• Система репутации для фракций
+• Исправлено 50+ багов и оптимизирован сервер
+
+Обновление уже активно — заходите и пробуйте!`,date:'27 мая 2026',author:'Администрация'},
+    {id:2,icon:'🏆',cat:'Ивент',title:'Турнир по уличным гонкам — призовой фонд 5 миллионов',excerpt:'Регистрация открыта. Участвуй и выиграй главный приз — 5 миллионов игровых долларов!',text:`Объявляем крупнейший турнир года — Уличные гонки LS!
+
+Даты проведения: 30 мая — 1 июня
+Место: Трасса Чилиад
+Участники: до 32 игроков
+Призовой фонд: 5,000,000 $
+
+Как участвовать:
+1. Зарегистрируйтесь в этой теме
+2. Явитесь на место 30 мая в 20:00
+3. Пройдите отборочный этап
+
+Удачи всем участникам!`,date:'25 мая 2026',author:'Организаторы'},
+    {id:3,icon:'📋',cat:'Важно',title:'Обновление правил форума — прочитайте обязательно',excerpt:'Внесены изменения в §2 и §4 правил. Все пользователи обязаны ознакомиться с обновлёнными правилами.',text:`Уважаемые игроки!
+
+Мы обновили правила форума. Основные изменения:
+
+§2.3 — Добавлено правило о пауэргейминге
+§4.1 — Новый порядок создания фракций  
+§5.1 — Уточнены санкции за нарушения
+
+Рекомендуем всем перечитать актуальную версию правил в соответствующем разделе.
+
+Администрация EXTAZY RP`,date:'20 мая 2026',author:'Администрация'}
+  ],
+  complaints:[
+    {id:1,author:'Maxwell_Cross',cat:'Жалоба на сотрудника LSPD',accused:'Officer_V',title:'Нарушение устава при задержании',text:'Во время задержания офицер применил оружие без предупреждения, нарушив устав LSPD §3.2. Имею скриншоты и видео доказательства.',evidence:['screenshot_01.png','video.mp4'],status:'review',date:'27.05.2026',responses:[{author:'Moderator_Admin',isAdmin:true,text:'Жалоба принята к рассмотрению. Запрошена запись с видеокамер сервера.',date:'27 мая 2026, 14:30'}]},
+    {id:2,author:'DarkViper_777',cat:'Жалоба на игрока',accused:'CheaterPro123',title:'Использование чит-модов (телепорт)',text:'Игрок явно использует телепортацию — появлялся в разных точках карты мгновенно. Прикладываю координаты и время.',evidence:['proof.png'],status:'new',date:'27.05.2026',responses:[]},
+    {id:3,author:'Phoenix_2024',cat:'Апелляция на бан',accused:'',title:'Бан выдан ошибочно — прошу разобраться',text:'Был заблокирован 25 мая за читерство, однако я не использовал сторонние программы. Возможна ошибка античита.',evidence:['anticheat_false.jpg'],status:'solved',date:'25.05.2026',responses:[{author:'Phoenix_2024',isAdmin:false,text:'Прошу рассмотреть срочно.',date:'25 мая 2026, 10:00'},{author:'Admin_Chief',isAdmin:true,text:'Рассмотрено. Бан снят, это действительно была ошибка системы. Приносим извинения.',date:'26 мая 2026, 12:00'}]}
+  ],
+  bans:[
+    {nick:'CheaterXXX',reason:'Использование читов',date:'25.05.2026',until:'Перманентно',by:'Admin_Chief'},
+    {nick:'ToxicPlayer99',reason:'Оскорбления, доведение до нарушений',date:'20.05.2026',until:'01.06.2026',by:'Moderator_V'}
+  ],
+  design:{gold:'#f0a500',red:'#e8192c',accent:'#00d4ff',slogan:'Лучший GTA5 RP сервер. Объединяем игроков каждый день. Живи игрой — создавай историю.',copy:'© 2025 EXTAZY RP. Все права защищены.'},
+  users:[{nick:'Taburet_Adminov',email:'admin@extazy.rp',pass:'12312312AS',role:'owner',date:'01.01.2025',complaints:0},{nick:'Moderator_V',email:'moder@extazy.rp',pass:'moder123',role:'moder',date:'15.01.2025',complaints:2}],
+  topPlayers:[{nick:'El_Jefe_MC',score:'2.4M',faction:'Cartel Norte',av:'🎭'},{nick:'DarkViper_777',score:'1.8M',faction:'Shadow Ops',av:'🦅'},{nick:'Phoenix_2024',score:'1.2M',faction:'LSPD',av:'🚔'},{nick:'RichGuy_SA',score:'980K',faction:'Civil',av:'💰'},{nick:'Maxwell_Cross',score:'750K',faction:'EMS',av:'🏥'}]
+};
+
+// ─── LOAD/SAVE ───
+let D = {
+  server: S.get('server', DEFAULTS.server),
+  stats: S.get('stats', DEFAULTS.stats),
+  announce: S.get('announce', DEFAULTS.announce),
+  rules: S.get('rules', DEFAULTS.rules),
+  tickers: S.get('tickers', DEFAULTS.tickers),
+  events: S.get('events', DEFAULTS.events),
+  news: S.get('news', DEFAULTS.news),
+  complaints: S.get('complaints', DEFAULTS.complaints),
+  bans: S.get('bans', DEFAULTS.bans),
+  design: S.get('design', DEFAULTS.design),
+  users: S.get('users', DEFAULTS.users),
+  topPlayers: S.get('topPlayers', DEFAULTS.topPlayers),
+};
+let currentUser = S.get('currentUser', null);
+let activeCompFilter = 'all';
+let aActiveCompFilter = 'all';
+let currentPage = 'home';
+
+function save(key){ S.set(key, D[key]); }
+
+// ─── INIT ───
+function init(){
+  applyDesign();
+  updateHeader();
+  renderHome();
+  renderTicker();
+}
+
+function applyDesign(){
+  const d = D.design;
+  document.documentElement.style.setProperty('--gold', d.gold||'#f0a500');
+  document.documentElement.style.setProperty('--red', d.red||'#e8192c');
+  document.documentElement.style.setProperty('--accent', d.accent||'#00d4ff');
+}
+
+// ─── PAGE NAVIGATION ───
+const PAGES = ['home','news','complaints','rules','banlist','profile'];
+function showPage(p){
+  currentPage = p;
+  PAGES.forEach(x => {
+    const el = document.getElementById('pg-'+x);
+    if(el) el.style.display = x===p ? 'block' : 'none';
+  });
+  document.querySelectorAll('.hnav a').forEach(a => a.classList.remove('act'));
+  const na = document.getElementById('nav-'+p);
+  if(na) na.classList.add('act');
+  if(p==='home') renderHome();
+  if(p==='news') renderNews();
+  if(p==='complaints') renderComplaints();
+  if(p==='rules') renderRules();
+  if(p==='banlist') renderBanlist();
+  if(p==='profile') renderProfile();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ─── HOME ───
+function renderHome(){
+  // Online / stats
+  document.getElementById('hdr-onum').textContent = D.server.online;
+  document.getElementById('hs-online').textContent = D.server.online;
+  document.getElementById('hs-players').textContent = D.server.total.toLocaleString('ru');
+  document.getElementById('st-msgs').textContent = D.stats.msgs;
+  document.getElementById('st-topics').textContent = D.stats.topics;
+  document.getElementById('st-users').textContent = D.users.filter(u=>u.role!=='banned').length;
+  document.getElementById('st-online').textContent = D.server.online;
+  document.getElementById('sv1-pop').textContent = D.server.online+'/'+D.server.max;
+  document.getElementById('sv1-bar').style.width = Math.round(D.server.online/D.server.max*100)+'%';
+  document.getElementById('sv1-name').textContent = D.server.name;
+
+  // Announce
+  document.getElementById('ann-icon').textContent = D.announce.icon;
+  document.getElementById('ann-title').textContent = D.announce.title;
+  document.getElementById('ann-text').textContent = D.announce.text;
+
+  // Hero sub
+  document.getElementById('hero-sub').textContent = D.design.slogan;
+  document.getElementById('footer-desc').textContent = D.design.slogan.split('.')[0]+'.';
+  document.getElementById('footer-copy').textContent = D.design.copy;
+
+  // Cat counts
+  document.getElementById('cat-news-c').textContent = D.news.length;
+  document.getElementById('cat-comp-c').textContent = D.complaints.length;
+  document.getElementById('cat-comp-s').textContent = D.complaints.filter(c=>c.status==='solved').length;
+  document.getElementById('cat-ban-c').textContent = D.bans.length;
+
+  // Events
+  const el = document.getElementById('events-list');
+  if(el) el.innerHTML = D.events.map(e=>`<div class="evi"><div class="evd"><div class="evday">${e.day}</div><div class="evmon">${e.mon}</div></div><div><div class="evt">${e.title}</div><div class="evs">${e.desc}</div></div></div>`).join('') || '<div class="empty">Нет событий</div>';
+
+  // Top players
+  const tp = document.getElementById('top-players');
+  if(tp) tp.innerHTML = D.topPlayers.map((p,i)=>`<div style="display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid var(--border);"><div style="font-family:'Bebas Neue';font-size:18px;width:22px;text-align:center;color:${i===0?'var(--gold)':i===1?'#c0c0c0':i===2?'#cd7f32':'var(--muted)'}">${i+1}</div><div style="width:28px;height:28px;border-radius:50%;background:#f0a50020;display:flex;align-items:center;justify-content:center;font-size:13px;">${p.av}</div><div style="flex:1;min-width:0;"><div style="font-size:12px;font-weight:600;">${p.nick}</div><div style="font-size:10px;color:var(--muted);">${p.faction}</div></div><div style="font-family:'Rajdhani';font-size:13px;font-weight:700;color:var(--gold);">${p.score}</div></div>`).join('');
+
+  // Activity
+  const acts = [
+    ...D.complaints.slice(-3).reverse().map(c=>`<div class="acti"><div class="acta" style="background:#00d4ff15">🆘</div><div><div class="actx"><strong>${c.author}</strong> подал жалобу «${c.title.substring(0,30)}…»</div><div class="actt">${c.date}</div></div></div>`),
+    ...D.news.slice(-2).reverse().map(n=>`<div class="acti"><div class="acta" style="background:#f0a50015">${n.icon}</div><div><div class="actx"><strong>Администрация</strong> опубликовала: «${n.title.substring(0,28)}…»</div><div class="actt">${n.date}</div></div></div>`)
+  ];
+  const al = document.getElementById('activity-list');
+  if(al) al.innerHTML = acts.slice(0,5).join('') || '<div class="empty">Нет активности</div>';
+
+  // Hot topics
+  renderHotTopics();
+}
+
+function renderHotTopics(){
+  const list = document.getElementById('hot-topics');
+  if(!list) return;
+  const items = [...D.complaints].slice(-7).reverse();
+  list.innerHTML = items.map(c=>{
+    const [tag,cls] = statusTag(c.status);
+    return `<div class="titem ${c.status==='new'?'hot':''}" onclick="showPage('complaints')">
+      <div class="tava" style="background:#00d4ff15">🆘</div>
+      <div>
+        <div class="ttop"><span class="tname">${c.title}</span><span class="tag ${cls}">${tag}</span></div>
+        <div class="tmeta"><span>👤 ${c.author}</span><span>📂 ${c.cat}</span><span>⏱ ${c.date}</span></div>
+      </div>
+      <div class="tst"><div class="tr">${c.responses.length}</div><div class="trl">ответов</div></div>
+    </div>`;
+  }).join('') || '<div class="empty">Жалоб пока нет</div>';
+}
+
+// ─── TICKER ───
+function renderTicker(){
+  const tks = D.tickers;
+  const base = tks.map((t,i)=>`<span>${t}</span><span class="tk-sep">✦</span>`).join('');
+  document.getElementById('ticker-track').innerHTML = base + base;
+}
+
+// ─── NEWS ───
+function renderNews(detailId){
+  const cnt = document.getElementById('news-content');
+  if(detailId !== undefined){
+    const n = D.news.find(x=>x.id===detailId);
+    if(!n){renderNews();return;}
+    cnt.innerHTML = `
+      <button class="back-link" onclick="renderNews()">← Назад к новостям</button>
+      <div class="news-full">
+        <div class="nf-cat">${n.cat} ${n.icon}</div>
+        <div class="nf-title">${n.title}</div>
+        <div class="nf-meta"><span>👤 ${n.author}</span><span>📅 ${n.date}</span></div>
+        <div class="nf-body">${n.text}</div>
+      </div>`;
+    return;
+  }
+  if(!D.news.length){cnt.innerHTML='<div class="empty">Новостей пока нет</div>';return;}
+  const [first,...rest] = [...D.news].reverse();
+  cnt.innerHTML = `
+    <div class="news-card" onclick="renderNews(${first.id})" style="margin-bottom:14px;">
+      <div class="news-banner" style="height:180px;"><div class="news-banner-glow"></div><span style="position:relative;font-size:64px;">${first.icon}</span></div>
+      <div class="news-body"><div class="news-cat">${first.cat}</div><div class="news-title">${first.title}</div><div class="news-excerpt">${first.excerpt}</div><div class="news-meta"><span>👤 ${first.author}</span><span>📅 ${first.date}</span></div></div>
+    </div>
+    <div class="news-grid">
+      ${rest.map(n=>`<div class="news-card" onclick="renderNews(${n.id})">
+        <div class="news-banner"><div class="news-banner-glow"></div><span style="position:relative;font-size:42px;">${n.icon}</span></div>
+        <div class="news-body"><div class="news-cat">${n.cat}</div><div class="news-title">${n.title}</div><div class="news-excerpt">${n.excerpt.substring(0,80)}…</div><div class="news-meta"><span>📅 ${n.date}</span></div></div>
+      </div>`).join('')}
+    </div>`;
+}
+
+// ─── COMPLAINTS ───
+function statusTag(s){
+  return {new:['🔵 Новая','tag-new'],review:['🟡 Рассматривается','tag-pend'],solved:['🟢 Решена','tag-sol'],rejected:['🔴 Отклонена','tag-rej']}[s]||['?',''];
+}
+function statusDot(s){return {new:'dnew',review:'dreview',solved:'dsolved',rejected:'drejected'}[s]||'';}
+
+function renderComplaints(filter){
+  if(filter) activeCompFilter = filter;
+  const isLogged = !!currentUser;
+  const warn = document.getElementById('comp-login-warn');
+  const body = document.getElementById('comp-form-body');
+  if(warn) warn.style.display = isLogged ? 'none' : 'block';
+  if(body) body.style.display = isLogged ? 'block' : 'none';
+
+  const list = document.getElementById('comp-list');
+  if(!list) return;
+  let items = activeCompFilter==='all' ? D.complaints : D.complaints.filter(c=>c.status===activeCompFilter);
+  items = [...items].reverse();
+  list.innerHTML = items.map(c=>renderComplaintCard(c,false)).join('') || '<div class="empty">Жалоб не найдено</div>';
+}
+
+function renderComplaintCard(c, isAdmin){
+  const [tag,tagcls] = statusTag(c.status);
+  const dc = statusDot(c.status);
+  const responses = c.responses.map(r=>`
+    <div class="ritem ${r.isAdmin?'adm':''}">
+      <div class="rauth">${r.isAdmin?'🛡️ ':'👤 '}${r.author}</div>
+      <div class="rtxt">${r.text}</div>
+      <div class="rtime">${r.date}</div>
+    </div>`).join('');
+  const adminActions = isAdmin ? `
+    <div class="cactions">
+      <textarea class="rta" id="${isAdmin?'a':''}reply-${c.id}" placeholder="Написать ответ по жалобе..."></textarea>
+      <div class="actbtns">
+        <button class="btn btn-g btn-xs" onclick="${isAdmin?'aReply':'userReply'}(${c.id})">💬 Ответить</button>
+        <button class="btn btn-gy btn-xs" style="border-color:#fbbf2430;color:#fbbf24;" onclick="aChangeStatus(${c.id},'review')">🔍 Рассмотрение</button>
+        <button class="btn btn-gr btn-xs" onclick="aChangeStatus(${c.id},'solved')">✅ Решена</button>
+        <button class="btn btn-r btn-xs" onclick="aChangeStatus(${c.id},'rejected')">❌ Отклонить</button>
+        <button class="btn btn-gy btn-xs" style="border-color:#f8717130;color:#f87171;" onclick="deleteComplaint(${c.id})">🗑️ Удалить</button>
+      </div>
+    </div>` : (currentUser ? `
+    <div class="cactions">
+      <textarea class="rta" id="reply-${c.id}" placeholder="Написать комментарий..."></textarea>
+      <button class="btn btn-g btn-xs" onclick="userReply(${c.id})">💬 Ответить</button>
+    </div>` : '');
+  return `<div class="ccard" id="ccard-${c.id}" data-id="${c.id}">
+    <div class="ccard-hd" onclick="toggleCard(${c.id})">
+      <div class="cdot ${dc}"></div>
+      <div class="cinfo">
+        <div class="ctitle">${c.title}</div>
+        <div class="cmeta">👤 ${c.author} · 📂 ${c.cat}${c.accused?' · 🎯 '+c.accused:''} · ⏱ ${c.date}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;">
+        <span class="tag ${tagcls}">${tag}</span>
+        ${c.responses.length?`<span style="font-size:10px;color:var(--muted);">💬 ${c.responses.length}</span>`:''}
+      </div>
+      <div class="cexp">▼</div>
+    </div>
+    <div class="cbody">
+      <div class="ctxt">${c.text}</div>
+      ${c.evidence.length?`<div class="cevid">${c.evidence.map(e=>`<span class="evtag">📎 ${e}</span>`).join('')}</div>`:''}
+      ${c.responses.length?`<div class="cresp"><div class="cresp-t">Ответы (${c.responses.length})</div>${responses}</div>`:''}
+      ${adminActions}
+    </div>
+  </div>`;
+}
+
+function toggleCard(id){
+  const el = document.getElementById('ccard-'+id);
+  if(el) el.classList.toggle('exp');
+}
+
+function filterComp(f, btn){
+  document.querySelectorAll('#pg-complaints .cfbtn').forEach(b=>b.classList.remove('act'));
+  if(btn) btn.classList.add('act');
+  renderComplaints(f);
+}
+
+function submitComplaint(){
+  if(!currentUser){toast('⚠️','Требуется авторизация','Войдите в аккаунт чтобы подать жалобу');return;}
+  const cat = document.getElementById('comp-cat').value;
+  const title = document.getElementById('comp-title').value.trim();
+  const text = document.getElementById('comp-text').value.trim();
+  const accused = document.getElementById('comp-accused').value.trim();
+  const evidence = document.getElementById('comp-evidence').value.trim();
+  if(!cat){toast('❌','Ошибка','Выберите категорию жалобы');return;}
+  if(!title){toast('❌','Ошибка','Введите заголовок жалобы');return;}
+  if(!text||text.length<20){toast('❌','Ошибка','Описание слишком короткое (мин. 20 символов)');return;}
+  const now = new Date();
+  const date = now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'});
+  const comp = {
+    id: Date.now(), author: currentUser.nick, cat, accused, title, text,
+    evidence: evidence ? evidence.split(',').map(s=>s.trim()).filter(Boolean) : [],
+    status:'new', date, responses:[]
+  };
+  D.complaints.push(comp);
+  save('complaints');
+  // Update user complaint count
+  const u = D.users.find(x=>x.nick===currentUser.nick);
+  if(u){u.complaints=(u.complaints||0)+1;save('users');}
+  // Clear form
+  ['comp-cat','comp-title','comp-text','comp-accused','comp-evidence'].forEach(id=>{document.getElementById(id).value='';});
+  renderComplaints();
+  renderHome();
+  toast('✅','Жалоба подана','Администраторы рассмотрят в течение 24 часов');
+}
+
+function userReply(id){
+  const ta = document.getElementById('reply-'+id);
+  if(!ta||!ta.value.trim()){toast('⚠️','Пусто','Введите текст ответа');return;}
+  const c = D.complaints.find(x=>x.id===id);
+  if(!c) return;
+  const now = new Date();
+  c.responses.push({author:currentUser.nick,isAdmin:false,text:ta.value.trim(),date:now.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})+', '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})});
+  save('complaints');
+  renderComplaints();
+  toast('✅','Ответ добавлен','');
+  setTimeout(()=>{const el=document.getElementById('ccard-'+id);if(el)el.classList.add('exp');},50);
+}
+
+// ─── RULES ───
+function renderRules(){
+  const cnt = document.getElementById('rules-content');
+  if(cnt) cnt.innerHTML = `<div class="nf-body" style="white-space:pre-wrap;">${D.rules}</div>`;
+}
+
+// ─── BANLIST ───
+function renderBanlist(){
+  const tb = document.getElementById('banlist-body');
+  if(!tb) return;
+  tb.innerHTML = D.bans.map(b=>`<tr>
+    <td><strong>${b.nick}</strong></td>
+    <td style="color:var(--muted)">${b.reason}</td>
+    <td style="color:var(--muted)">${b.date}</td>
+    <td style="color:${b.until==='Перманентно'?'#f87171':'var(--text)'}">${b.until}</td>
+    <td style="color:var(--muted)">${b.by}</td>
+  </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:24px;">Банлист пуст</td></tr>';
+}
+
+// ─── AUTH ───
+function doLogin(){
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-err');
+  const found = D.users.find(x=>(x.nick===u||x.email===u)&&x.pass===p);
+  if(!found){err.style.display='block';return;}
+  if(found.role==='banned'){err.textContent='Аккаунт заблокирован.';err.style.display='block';return;}
+  currentUser = found;
+  S.set('currentUser', currentUser);
+  closeModal('login-modal');
+  updateHeader();
+  toast('👋','Добро пожаловать!',currentUser.nick+' вошёл в систему');
+  if(currentPage==='complaints') renderComplaints();
+}
+
+function doRegister(){
+  const nick = document.getElementById('reg-user').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const p1 = document.getElementById('reg-pass').value;
+  const p2 = document.getElementById('reg-pass2').value;
+  const err = document.getElementById('reg-err');
+  err.style.display='none';
+  if(!/^[a-zA-Z0-9_]{3,20}$/.test(nick)){err.textContent='Никнейм: 3-20 символов, только латиница/цифры/_';err.style.display='block';return;}
+  const emailRegex = /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/;
+  if(!emailRegex.test(email)){err.textContent='Введите реальный email (например: user@gmail.com)';err.style.display='block';return;}
+  // Block fake/disposable domains and require real TLDs
+  const emailDomain = email.split('@')[1].toLowerCase();
+  const fakeDomains = ['test.com','test.ru','fake.com','fake.ru','example.com','example.ru','mail.ru.com','temp.com','noemail.com','nomail.com','asd.com','qwe.ru','zxc.com','abc.com','xyz.com','aaa.com','bbb.com','ccc.com','none.com','asdf.com','qwerty.ru','123.com','111.com','aaa.ru','test.test','fake.fake','no.com','nope.com','notreal.com','notanemail.com'];
+  if(fakeDomains.includes(emailDomain)){err.textContent='Используйте реальный email-адрес (Gmail, Mail.ru, Yandex и т.д.)';err.style.display='block';return;}
+  // Require domain to have a real TLD (min 2 chars after last dot) and at least one dot in domain
+  const domainParts = emailDomain.split('.');
+  if(domainParts.length < 2 || domainParts[domainParts.length-1].length < 2 || domainParts[0].length < 2){err.textContent='Домен почты выглядит ненастоящим';err.style.display='block';return;}
+  // Block single-word domains that are likely fake (no known TLD combo)
+  const validTLDs = ['com','ru','net','org','io','me','co','uk','de','fr','es','it','pl','ua','kz','by','info','biz','online','site','app','dev','pro','email','mail','рф','gmail','yahoo','yandex','hotmail','outlook','icloud','proton','tutanota'];
+  const tld = domainParts[domainParts.length-1];
+  const sld = domainParts[domainParts.length-2];
+  if(!validTLDs.includes(tld) && !validTLDs.includes(sld)){err.textContent='Используйте реальный почтовый сервис (Gmail, Mail.ru, Yandex, Outlook...)';err.style.display='block';return;}
+  if(p1.length<6){err.textContent='Пароль минимум 6 символов';err.style.display='block';return;}
+  if(p1!==p2){err.textContent='Пароли не совпадают';err.style.display='block';return;}
+  if(D.users.find(x=>x.nick.toLowerCase()===nick.toLowerCase()||x.email===email)){err.textContent='Никнейм или email уже используется';err.style.display='block';return;}
+  const now = new Date();
+  const newUser = {nick,email,pass:p1,role:'user',date:now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'}),complaints:0};
+  D.users.push(newUser);
+  save('users');
+  currentUser = newUser;
+  S.set('currentUser', currentUser);
+  closeModal('reg-modal');
+  updateHeader();
+  toast('🎉','Добро пожаловать!','Аккаунт создан — '+nick);
+}
+
+function logout(){
+  currentUser = null;
+  S.set('currentUser', null);
+  updateHeader();
+  if(currentPage==='profile') showPage('home');
+  toast('👋','Выход','Вы вышли из аккаунта');
+}
+
+function updateHeader(){
+  const area = document.getElementById('hdr-user-area');
+  const logged = document.getElementById('hdr-logged');
+  const uname = document.getElementById('hdr-username');
+  const abtn = document.getElementById('admin-btn');
+  if(currentUser){
+    area.style.display='none';
+    logged.style.display='flex';
+    uname.textContent = currentUser.nick;
+    abtn.style.display = (['owner','co-owner','admin','moder','helper'].includes(currentUser.role)) ? 'inline-flex' : 'none';
+  } else {
+    area.style.display='flex';
+    logged.style.display='none';
+  }
+}
+
+function openProfile(){
+  showPage('profile');
+}
+function renderProfile(){
+  if(!currentUser){showPage('home');return;}
+  const u = D.users.find(x=>x.nick===currentUser.nick)||currentUser;
+  const m = ROLE_META[u.role]||ROLE_META.user;
+  const myComps = D.complaints.filter(c=>c.author===u.nick);
+  document.getElementById('profile-content').innerHTML = `
+    <div class="profile-card">
+      <div class="pava" style="background:#f0a50015;">${u.nick[0].toUpperCase()}</div>
+      <div style="flex:1;">
+        <div class="pname">${u.nick}</div>
+        <div class="prole-badge" style="background:${m.color}20;color:${m.color};border:1px solid ${m.color}40;">${m.label}</div>
+        <div style="font-size:11px;color:var(--muted);">📅 Регистрация: ${u.date}</div>
+        <div class="pstats">
+          <div class="pstat"><div class="pstn">${myComps.length}</div><div class="pstl">Жалоб подано</div></div>
+          <div class="pstat"><div class="pstn">${myComps.filter(c=>c.status==='solved').length}</div><div class="pstl">Решено</div></div>
+          <div class="pstat"><div class="pstn" style="font-size:14px;">${u.email}</div><div class="pstl">Email</div></div>
+        </div>
+      </div>
+    </div>
+    ${myComps.length?`<div style="margin-top:20px;"><div class="sh"><div class="st">Мои жалобы</div></div><div class="comp-cards">${[...myComps].reverse().map(c=>renderComplaintCard(c,false)).join('')}</div></div>`:''}`;
+}
+
+// ─── SEARCH ───
+function doSearch(q){
+  if(!q.trim()) return;
+  // Simple search — redirect to complaints if query matches
+}
+
+// ─── MODALS ───
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function closeModalOutside(e,id){if(e.target.id===id)closeModal(id);}
+
+// ─── TOAST ───
+let toastTimer;
+function toast(ic,t,m){
+  clearTimeout(toastTimer);
+  const el=document.getElementById('toast');
+  document.getElementById('toast-ic').textContent=ic;
+  document.getElementById('toast-t').textContent=t;
+  document.getElementById('toast-m').textContent=m;
+  el.style.display='flex';
+  toastTimer=setTimeout(()=>el.style.display='none',3800);
+}
+
+// ─── PERMISSION SYSTEM ───
+// owner(5) > co-owner(4) > admin(3) > moder(2) > helper(1)
+const ROLE_LEVEL = {owner:5,'co-owner':4, admin:3, moder:2, helper:1, user:0, banned:-1};
+const ROLE_META = {
+  owner:     {label:'👑 Владелец',    color:'#ff44ff', bg:'#ff44ff'},
+  'co-owner':{label:'💎 Со-Владелец', color:'#a855f7', bg:'#a855f7'},
+  admin:     {label:'🛡️ Администратор',color:'#f87171', bg:'#e8192c'},
+  moder:     {label:'⚔️ Модератор',   color:'#f0a500', bg:'#f0a500'},
+  helper:    {label:'🔧 Хелпер',      color:'#00d4ff', bg:'#00d4ff'},
+  user:      {label:'Игрок',          color:'#7878a0', bg:'#7878a0'},
+  banned:    {label:'🚫 Забанен',     color:'#555',    bg:'#555'},
+};
+
+// Вкладки по уровню доступа
+const TABS_BY_ROLE = {
+  owner:     ['dashboard','complaints','news','users','banlist','server','ticker','announce','rules','events','design','logs'],
+  'co-owner':['dashboard','complaints','news','users','banlist','server','ticker','announce','rules','events','design','logs'],
+  admin:     ['dashboard','complaints','news','users','banlist','server','ticker','announce','rules','events','logs'],
+  moder:     ['dashboard','complaints','banlist','logs'],
+  helper:    ['dashboard','complaints'],
+};
+const TAB_LABELS = {
+  dashboard:'📊 Дашборд', complaints:'🆘 Жалобы', news:'📣 Новости',
+  users:'👥 Пользователи', banlist:'🚫 Банлист', server:'🖥️ Сервер',
+  ticker:'📡 Тикер', announce:'📢 Объявление', rules:'📋 Правила',
+  events:'🎯 События', design:'🎨 Дизайн', logs:'📜 Логи',
+};
+
+function canDo(action){
+  if(!currentUser) return false;
+  const lvl = ROLE_LEVEL[currentUser.role]||0;
+  const isTaburet = currentUser.nick==='Taburet_Adminov';
+  const perms = {
+    assignRoles:  isTaburet,   // только Taburet_Adminov
+    assignOwner:  isTaburet,
+    deleteUsers:  lvl>=4,
+    manageDesign: lvl>=5||lvl>=4,
+    manageServer: lvl>=3,
+    manageNews:   lvl>=3,
+    manageBans:   lvl>=2,
+    manageComplaints: lvl>=1,
+    manageTicker: lvl>=4,
+    manageAnnounce:lvl>=3,
+    manageRules:  lvl>=3,
+    manageEvents: lvl>=3,
+  };
+  return !!perms[action];
+}
+
+
+const ADMIN_PASSWORD = 'ALOGIN13';
+
+function openAdmin(){
+  if(!currentUser||!['owner','co-owner','admin','moder','helper'].includes(currentUser.role)){toast('❌','Доступ запрещён','');return;}
+  // Проверяем сохранённый пароль
+  const saved = S.get('admin_pass_ok', null);
+  const savedAt = S.get('admin_pass_ts', 0);
+  const sevenDays = 7*24*60*60*1000;
+  if(saved && (Date.now()-savedAt) < sevenDays){
+    _openAdminPanel(); return;
+  }
+  // Показываем модалку пароля
+  document.getElementById('apass-err').style.display='none';
+  document.getElementById('admin-pass-inp').value='';
+  openModal('admin-pass-modal');
+  setTimeout(()=>document.getElementById('admin-pass-inp').focus(),100);
+}
+
+function checkAdminPass(){
+  const val = document.getElementById('admin-pass-inp').value;
+  const err = document.getElementById('apass-err');
+  if(val !== ADMIN_PASSWORD){
+    err.style.display='block';
+    addLog('login','🔐','Неудачная попытка входа в панель','—','❌');
+    return;
+  }
+  const remember = document.getElementById('admin-pass-remember').checked;
+  if(remember){ S.set('admin_pass_ok',true); S.set('admin_pass_ts',Date.now()); }
+  closeModal('admin-pass-modal');
+  addLog('login','🔐','Вход в панель управления',currentUser.nick,'✅');
+  _openAdminPanel();
+}
+
+function _openAdminPanel(){
+  document.getElementById('admin-panel').classList.add('open');
+  const role = currentUser.role;
+  const tabs = TABS_BY_ROLE[role]||['dashboard','complaints'];
+  const nav = document.getElementById('admin-nav-tabs');
+  nav.innerHTML = tabs.map((t,i)=>`<button class="anbtn${i===0?' act':''}" onclick="aTab('${t}',this)">${TAB_LABELS[t]}</button>`).join('');
+  document.querySelectorAll('.tab-c').forEach(el=>{
+    const id = el.id.replace('tab-','');
+    el.style.display = tabs.includes(id) ? '' : 'none';
+    el.classList.remove('act');
+  });
+  const firstTab = document.getElementById('tab-'+tabs[0]);
+  if(firstTab) firstTab.classList.add('act');
+  const badge = document.getElementById('admin-role-badge');
+  if(badge){
+    const m = ROLE_META[role]||ROLE_META.user;
+    badge.textContent = m.label;
+    badge.style.color = m.color;
+    badge.style.background = m.color+'18';
+    badge.style.border = '1px solid '+m.color+'40';
+  }
+  // Последний вход
+  const lastLogin = S.get('admin_last_login_'+currentUser.nick, null);
+  const now = new Date();
+  const nowStr = now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'});
+  S.set('admin_last_login_'+currentUser.nick, nowStr);
+  renderAdminStats();
+  renderAdminDash(lastLogin);
+  renderAdminComps();
+  renderAdminNews();
+  renderAdminUsers();
+  renderAdminServer();
+  renderAdminTicker();
+  renderAdminAnnounce();
+  renderAdminRules();
+  renderAdminEvents();
+  renderAdminBanlist();
+  renderAdminDesign();
+  renderLogs();
+  const lvlNames = {owner:'👑 Владелец — полный доступ','co-owner':'💎 Со-Владелец',admin:'🛡️ Администратор',moder:'⚔️ Модератор',helper:'🔧 Хелпер'};
+  toast('🔓','Панель управления', (lastLogin?'Последний вход: '+lastLogin:lvlNames[role]||''));
+}
+function closeAdmin(){
+  document.getElementById('admin-panel').classList.remove('open');
+  renderHome();
+  if(currentPage==='complaints') renderComplaints();
+  if(currentPage==='news') renderNews();
+  if(currentPage==='banlist') renderBanlist();
+  if(currentPage==='rules') renderRules();
+}
+
+// ─── LOGS SYSTEM ───
+function addLog(type, icon, action, by, result){
+  if(!currentUser && type!=='login') return;
+  const who = by || (currentUser ? currentUser.nick : '?');
+  const now = new Date();
+  const ts = now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'})+' '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const logs = S.get('admin_logs',[]);
+  logs.push({type, icon, action, by:who, result:result||'', ts, id:Date.now()});
+  // Хранить не более 300 записей
+  if(logs.length>300) logs.splice(0, logs.length-300);
+  S.set('admin_logs', logs);
+}
+
+let activeLogFilter = 'all';
+function filterLogs(f, btn){
+  activeLogFilter = f;
+  document.querySelectorAll('#tab-logs .btn').forEach(b=>{ b.style.borderColor=''; b.style.color=''; });
+  if(btn){ btn.style.borderColor='var(--gold)'; btn.style.color='var(--gold)'; }
+  renderLogs();
+}
+function renderLogs(){
+  const list = document.getElementById('logs-list');
+  if(!list) return;
+  let logs = S.get('admin_logs',[]);
+  if(activeLogFilter!=='all') logs = logs.filter(l=>l.type===activeLogFilter);
+  logs = [...logs].reverse();
+  if(!logs.length){list.innerHTML='<div class="empty">Логов нет</div>';return;}
+  const typeColors = {role:'#ff44ff',ban:'#f87171',complaint:'#00d4ff',news:'#f0a500',login:'#4ade80',delete:'#f87171',design:'#a855f7',server:'#fbbf24'};
+  list.innerHTML = logs.map(l=>{
+    const c = typeColors[l.type]||'#7878a0';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:8px;background:#ffffff05;border:1px solid #ffffff08;font-size:12px;">
+      <span style="font-size:16px;">${l.icon}</span>
+      <div style="flex:1;min-width:0;">
+        <div style="font-weight:600;color:var(--text);">${l.action}</div>
+        <div style="color:var(--muted);font-size:10px;margin-top:2px;">👤 ${l.by} · 🕐 ${l.ts}</div>
+      </div>
+      <span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${c}18;color:${c};border:1px solid ${c}30;flex-shrink:0;">${l.type}</span>
+      ${l.result?`<span style="font-size:13px;">${l.result}</span>`:''}
+    </div>`;
+  }).join('');
+}
+function clearLogs(){
+  if(!confirm('Очистить все логи?')) return;
+  S.set('admin_logs',[]);
+  renderLogs();
+  toast('🗑️','Логи очищены','');
+}
+
+function aTab(id, btn){
+  document.querySelectorAll('.tab-c').forEach(t=>t.classList.remove('act'));
+  document.querySelectorAll('.anbtn').forEach(b=>b.classList.remove('act'));
+  document.getElementById('tab-'+id).classList.add('act');
+  if(btn) btn.classList.add('act');
+}
+
+function renderAdminStats(){
+  const row = document.getElementById('admin-stats-row');
+  const data = [
+    {n:D.complaints.length,l:'Жалоб',i:'🆘'},
+    {n:D.complaints.filter(c=>c.status==='new').length,l:'Новых',i:'🔵'},
+    {n:D.users.length,l:'Пользователей',i:'👥'},
+    {n:D.news.length,l:'Новостей',i:'📣'},
+    {n:D.server.online,l:'Онлайн',i:'🟢'},
+  ];
+  row.innerHTML = data.map(d=>`<div class="asc"><div class="asci">${d.i}</div><div class="ascn">${d.n}</div><div class="ascl">${d.l}</div></div>`).join('');
+}
+
+function renderAdminDash(lastLogin){
+  const dg = document.getElementById('dash-grid');
+  const solved = D.complaints.filter(c=>c.status==='solved').length;
+  const pct = D.complaints.length ? Math.round(solved/D.complaints.length*100) : 0;
+  dg.innerHTML = [
+    {l:'Решено жалоб',n:pct+'%',s:'Процент решения'},
+    {l:'Банов выдано',n:D.bans.length,s:'Активных'},
+    {l:'Событий',n:D.events.length,s:'Запланировано'},
+  ].map(x=>`<div class="sbox"><div class="sbox-n">${x.n}</div><div class="sbox-l">${x.l}</div></div>`).join('');
+
+  // Последний вход
+  const li = document.getElementById('dash-last-login');
+  if(li) li.textContent = lastLogin ? '🕐 Последний вход: '+lastLogin : '🆕 Первый вход в панель';
+
+  const rc = document.getElementById('dash-recent-comp');
+  rc.innerHTML = [...D.complaints].reverse().slice(0,3).map(c=>{const[t,cls]=statusTag(c.status);return`<div class="nal"><div class="nal-info"><div class="nal-t">${c.title}</div><div class="nal-m">👤 ${c.author} · ${c.date}</div></div><span class="tag ${cls}">${t}</span></div>`;}).join('')||'<div class="empty">Нет жалоб</div>';
+
+  const ru = document.getElementById('dash-recent-users');
+  ru.innerHTML = [...D.users].reverse().slice(0,3).map(u=>{const m=ROLE_META[u.role]||ROLE_META.user;return`<div class="nal"><div class="nal-info"><div class="nal-t">${u.nick}</div><div class="nal-m">${u.email} · ${u.date}</div></div><span style="font-size:10px;padding:2px 8px;border-radius:10px;background:${m.color}18;color:${m.color};border:1px solid ${m.color}30;">${m.label}</span></div>`;}).join('');
+}
+
+// ─ Admin Complaints ─
+function aFilterComp(f, btn){
+  aActiveCompFilter = f;
+  document.querySelectorAll('#tab-complaints .cfbtn').forEach(b=>b.classList.remove('act'));
+  if(btn) btn.classList.add('act');
+  renderAdminComps();
+}
+
+function renderAdminComps(){
+  const list = document.getElementById('admin-comp-list');
+  if(!list) return;
+  let items = aActiveCompFilter==='all' ? D.complaints : D.complaints.filter(c=>c.status===aActiveCompFilter);
+  items = [...items].reverse();
+  list.innerHTML = items.map(c=>renderAdminComp(c)).join('') || '<div class="empty">Жалоб не найдено</div>';
+}
+
+function renderAdminComp(c){
+  const [tag,tagcls] = statusTag(c.status);
+  const dc = statusDot(c.status);
+  const responses = c.responses.map(r=>`<div class="ritem ${r.isAdmin?'adm':''}"><div class="rauth">${r.isAdmin?'🛡️ ':'👤 '}${r.author}</div><div class="rtxt">${r.text}</div><div class="rtime">${r.date}</div></div>`).join('');
+  return `<div class="ccard" id="accard-${c.id}" data-id="${c.id}">
+    <div class="ccard-hd" onclick="aToggleCard(${c.id})">
+      <div class="cdot ${dc}"></div>
+      <div class="cinfo">
+        <div class="ctitle">${c.title}</div>
+        <div class="cmeta">👤 ${c.author}${c.accused?' · 🎯 '+c.accused:''} · 📂 ${c.cat} · ${c.date}</div>
+      </div>
+      <div style="display:flex;gap:6px;align-items:center;flex-shrink:0;"><span class="tag ${tagcls}">${tag}</span><span style="font-size:10px;color:var(--muted);">💬 ${c.responses.length}</span></div>
+      <div class="cexp">▼</div>
+    </div>
+    <div class="cbody">
+      <div class="ctxt">${c.text}</div>
+      ${c.evidence.length?`<div class="cevid">${c.evidence.map(e=>`<span class="evtag">📎 ${e}</span>`).join('')}</div>`:''}
+      ${c.responses.length?`<div class="cresp"><div class="cresp-t">Ответы (${c.responses.length})</div>${responses}</div>`:''}
+      <div class="cactions">
+        <textarea class="rta" id="areply-${c.id}" placeholder="Ответ администратора..."></textarea>
+        <div class="actbtns">
+          <button class="btn btn-g btn-xs" onclick="aReply(${c.id})">💬 Ответить</button>
+          <button class="btn btn-gy btn-xs" style="border-color:#fbbf2430;color:#fbbf24;" onclick="aChangeStatus(${c.id},'review')">🔍 Рассмотрение</button>
+          <button class="btn btn-gr btn-xs" onclick="aChangeStatus(${c.id},'solved')">✅ Решена</button>
+          <button class="btn btn-r btn-xs" onclick="aChangeStatus(${c.id},'rejected')">❌ Отклонить</button>
+          <button class="btn btn-gy btn-xs" style="border-color:#f8717130;color:#f87171;" onclick="deleteComplaint(${c.id})">🗑️ Удалить</button>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function aToggleCard(id){const el=document.getElementById('accard-'+id);if(el)el.classList.toggle('exp');}
+
+function aReply(id){
+  const ta = document.getElementById('areply-'+id);
+  if(!ta||!ta.value.trim()){toast('⚠️','Пусто','Введите текст');return;}
+  const c = D.complaints.find(x=>x.id===id);
+  if(!c) return;
+  const now = new Date();
+  c.responses.push({author:currentUser.nick,isAdmin:true,text:ta.value.trim(),date:now.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'})+', '+now.toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})});
+  save('complaints');
+  renderAdminComps();
+  renderAdminStats();
+  toast('✅','Ответ опубликован','');
+  setTimeout(()=>{const el=document.getElementById('accard-'+id);if(el)el.classList.add('exp');},50);
+}
+
+function aChangeStatus(id, st){
+  const c = D.complaints.find(x=>x.id===id);
+  if(!c) return;
+  c.status = st;
+  save('complaints');
+  addLog('complaint','🆘','Статус жалобы #'+id+' → '+{new:'Новая',review:'Рассмотрение',solved:'Решена',rejected:'Отклонена'}[st], currentUser.nick, '✅');
+  renderAdminComps();
+  renderAdminStats();
+  toast('✅','Статус изменён',{new:'🔵 Новая',review:'🟡 На рассмотрении',solved:'🟢 Решена',rejected:'🔴 Отклонена'}[st]);
+  setTimeout(()=>{const el=document.getElementById('accard-'+id);if(el)el.classList.add('exp');},50);
+}
+
+function deleteComplaint(id){
+  if(!confirm('Удалить жалобу?')) return;
+  D.complaints = D.complaints.filter(x=>x.id!==id);
+  save('complaints');
+  renderAdminComps();
+  renderAdminStats();
+  renderHotTopics();
+  toast('🗑️','Жалоба удалена','');
+}
+
+// ─ Admin News ─
+function renderAdminNews(){
+  const list = document.getElementById('admin-news-list');
+  list.innerHTML = [...D.news].reverse().map(n=>`<div class="nal">
+    <div style="font-size:22px;">${n.icon}</div>
+    <div class="nal-info"><div class="nal-t">${n.title}</div><div class="nal-m">${n.cat} · ${n.date}</div></div>
+    <button class="btn btn-r btn-xs" onclick="deleteNews(${n.id})">🗑️</button>
+  </div>`).join('')||'<div class="empty">Новостей нет</div>';
+}
+
+function addNews(){
+  if(!canDo('manageNews')){toast('❌','Нет доступа','Только Администраторы и выше');return;}
+  const cat = document.getElementById('na-cat').value;
+  const icon = document.getElementById('na-icon').value.trim()||'📰';
+  const text = document.getElementById('na-text').value.trim();
+  if(!title||!text){toast('❌','Ошибка','Заполните заголовок и текст');return;}
+  const now = new Date();
+  D.news.push({
+    id:Date.now(),icon,cat,title,
+    excerpt:text.substring(0,100)+(text.length>100?'…':''),
+    text,date:now.toLocaleDateString('ru-RU',{day:'numeric',month:'long',year:'numeric'}),
+    author:currentUser.nick
+  });
+  save('news');
+  addLog('news','📣','Опубликована новость: '+title, currentUser.nick, '✅');
+  renderAdminNews();
+  renderAdminStats();
+  toast('✅','Новость опубликована','');
+}
+
+function deleteNews(id){
+  if(!confirm('Удалить новость?')) return;
+  D.news = D.news.filter(x=>x.id!==id);
+  save('news');
+  renderAdminNews();
+  renderAdminStats();
+  toast('🗑️','Новость удалена','');
+}
+
+// ─ Admin Users ─
+function renderAdminUsers(){
+  const q = (document.getElementById('user-search')||{}).value||'';
+  const tb = document.getElementById('admin-users-body');
+  let users = D.users;
+  if(q) users = users.filter(u=>u.nick.toLowerCase().includes(q.toLowerCase())||u.email.includes(q));
+  const isTaburet = currentUser && currentUser.nick === 'Taburet_Adminov';
+  const myLvl = ROLE_LEVEL[currentUser.role]||0;
+
+  tb.innerHTML = users.map(u=>{
+    const m = ROLE_META[u.role]||ROLE_META.user;
+    const uLvl = ROLE_LEVEL[u.role]||0;
+    const isMe = u.nick === currentUser.nick;
+    const isOwnerAcc = u.nick === 'Taburet_Adminov';
+
+    // Кнопки ролей — только Taburet_Adminov выдаёт owner/co-owner
+    // Остальные могут выдавать только роли НИЖЕ своей
+    const allRoles = ['owner','co-owner','admin','moder','helper','user','banned'];
+    const btns = allRoles.filter(r=>{
+      if(r===u.role) return false; // уже эта роль
+      if(isOwnerAcc && r!=='owner') return false; // владельца нельзя понизить
+      if(r==='banned' && isMe) return false; // себя не банить
+      if((r==='owner'||r==='co-owner') && !isTaburet) return false; // только Taburet
+      if(!isTaburet && ROLE_LEVEL[r]>=myLvl) return false; // нельзя выдать >= свою
+      if(!isTaburet && isOwnerAcc) return false; // не трогать владельца
+      return true;
+    }).map(r=>{
+      const rm = ROLE_META[r];
+      const isBan = r==='banned';
+      const isUnban = u.role==='banned' && r==='user';
+      return `<button class="btn btn-xs" style="background:${rm.color}18;color:${rm.color};border:1px solid ${rm.color}40;font-size:10px;padding:3px 8px;" onclick="setRole('${u.nick}','${r}')" title="${rm.label}">${isBan?'🚫 Бан':isUnban?'✅ Разбан':rm.label}</button>`;
+    }).join('');
+
+    const delBtn = (isTaburet||myLvl>uLvl) && !isMe && !isOwnerAcc
+      ? `<button class="btn btn-xs" style="color:#f87171;border:1px solid #f8717130;background:transparent;font-size:10px;padding:3px 8px;" onclick="deleteUser('${u.nick}')">🗑️</button>`:'';
+
+    return `<tr>
+      <td><strong>${u.nick}</strong>${isOwnerAcc?'<span style="margin-left:5px;font-size:11px;">👑</span>':''}</td>
+      <td style="color:var(--muted);font-size:11px;">${u.email}</td>
+      <td><span style="display:inline-block;padding:2px 9px;border-radius:12px;font-size:10px;font-weight:700;letter-spacing:.4px;background:${m.color}18;color:${m.color};border:1px solid ${m.color}40;">${m.label}</span></td>
+      <td style="color:var(--muted);font-size:11px;">${u.date}</td>
+      <td>${u.complaints||0}</td>
+      <td style="display:flex;gap:4px;flex-wrap:wrap;align-items:center;">
+        ${btns||(!isTaburet&&isOwnerAcc?'<span style="font-size:10px;color:#ff44ff;">👑 Владелец</span>':'<span style="font-size:10px;color:var(--muted);font-style:italic;">—</span>')}
+        ${delBtn}
+      </td>
+    </tr>`;
+  }).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:24px;">Пусто</td></tr>';
+}
+
+function setRole(nick, role){
+  const u = D.users.find(x=>x.nick===nick);
+  if(!u) return;
+  const isTaburet = currentUser.nick === 'Taburet_Adminov';
+  const myLvl = ROLE_LEVEL[currentUser.role]||0;
+  // Только Taburet_Adminov может выдавать owner и co-owner
+  if((role==='owner'||role==='co-owner') && !isTaburet){
+    toast('❌','Нет доступа','Только Taburet_Adminov может выдавать эту роль');return;
+  }
+  // Нельзя выдавать роли выше своей (кроме Taburet_Adminov)
+  if(!isTaburet && ROLE_LEVEL[role]>=myLvl){
+    toast('❌','Нет доступа','Нельзя выдать роль выше или равную своей');return;
+  }
+  if(nick===currentUser.nick&&role==='banned'){toast('❌','Нельзя','Нельзя заблокировать себя');return;}
+  if(nick==='Taburet_Adminov'&&!isTaburet){toast('❌','Нельзя','Нельзя изменить роль владельца');return;}
+  u.role = role;
+  save('users');
+  if(currentUser.nick===nick){currentUser.role=role;S.set('currentUser',currentUser);updateHeader();}
+  renderAdminUsers();
+  const m = ROLE_META[role];
+  addLog('role','👑','Изменена роль: '+nick+' → '+(m?m.label:role), currentUser.nick, '✅');
+  toast('✅','Роль изменена', nick+' → '+(m?m.label:role));
+}
+
+function deleteUser(nick){
+  if(!confirm('Удалить пользователя '+nick+'?')) return;
+  D.users = D.users.filter(x=>x.nick!==nick);
+  save('users');
+  renderAdminUsers();
+  toast('🗑️','Пользователь удалён','');
+}
+
+// ─ Admin Server ─
+function renderAdminServer(){
+  document.getElementById('sv-online-r').value = D.server.online;
+  document.getElementById('sv-online-p').textContent = D.server.online;
+  document.getElementById('sv-max-i').value = D.server.max;
+  document.getElementById('sv-total-i').value = D.server.total;
+  document.getElementById('sv-name-i').value = D.server.name;
+  document.getElementById('st-msg-i').value = D.stats.msgs;
+  document.getElementById('st-top-i').value = D.stats.topics;
+}
+function svQuick(n){document.getElementById('sv-online-r').value=n;document.getElementById('sv-online-p').textContent=n;}
+function saveServer(){
+  D.server.online = parseInt(document.getElementById('sv-online-r').value)||0;
+  D.server.max = parseInt(document.getElementById('sv-max-i').value)||300;
+  D.server.total = parseInt(document.getElementById('sv-total-i').value)||D.server.total;
+  D.server.name = document.getElementById('sv-name-i').value.trim()||'Основной';
+  save('server');
+  const m = document.getElementById('sv-msg');
+  m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+  toast('✅','Сохранено','Настройки сервера обновлены');
+}
+function saveStats(){
+  D.stats.msgs = document.getElementById('st-msg-i').value.trim();
+  D.stats.topics = document.getElementById('st-top-i').value.trim();
+  save('stats');
+  const m = document.getElementById('st-msg');
+  m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+}
+
+// ─ Admin Ticker ─
+function renderAdminTicker(){
+  const cnt = document.getElementById('ticker-admin');
+  cnt.innerHTML = D.tickers.map((t,i)=>`<div class="tick-item">
+    <span style="font-size:11px;color:var(--muted);min-width:50px;">Строка ${i+1}</span>
+    <input class="ifield" style="margin:0;flex:1;" type="text" id="tick-${i}" value="${t}">
+  </div>`).join('');
+}
+function saveTicker(){
+  D.tickers = [0,1,2,3].map(i=>(document.getElementById('tick-'+i)||{value:D.tickers[i]}).value||D.tickers[i]);
+  save('tickers');
+  renderTicker();
+  const m=document.getElementById('tick-msg');m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+  toast('✅','Сохранено','Бегущая строка обновлена');
+}
+
+// ─ Admin Announce ─
+function renderAdminAnnounce(){
+  document.getElementById('ann-icon-i').value = D.announce.icon;
+  document.getElementById('ann-title-i').value = D.announce.title;
+  document.getElementById('ann-text-i').value = D.announce.text;
+  document.getElementById('ann-prev-ic').textContent = D.announce.icon;
+  document.getElementById('ann-prev-t').textContent = D.announce.title;
+  document.getElementById('ann-prev-tx').textContent = D.announce.text;
+  ['ann-icon-i','ann-title-i','ann-text-i'].forEach(id=>{
+    const el = document.getElementById(id);
+    el.oninput = ()=>{
+      document.getElementById('ann-prev-ic').textContent = document.getElementById('ann-icon-i').value||'📢';
+      document.getElementById('ann-prev-t').textContent = document.getElementById('ann-title-i').value||'Заголовок';
+      document.getElementById('ann-prev-tx').textContent = document.getElementById('ann-text-i').value||'Текст';
+    };
+  });
+}
+function saveAnnounce(){
+  D.announce = {icon:document.getElementById('ann-icon-i').value||'📢',title:document.getElementById('ann-title-i').value,text:document.getElementById('ann-text-i').value};
+  save('announce');
+  const m=document.getElementById('ann-msg');m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+  toast('✅','Сохранено','Объявление обновлено');
+}
+
+// ─ Admin Rules ─
+function renderAdminRules(){
+  document.getElementById('rules-editor').value = D.rules;
+}
+function saveRules(){
+  D.rules = document.getElementById('rules-editor').value;
+  save('rules');
+  const m=document.getElementById('rules-msg');m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+  toast('✅','Правила сохранены','');
+}
+
+// ─ Admin Events ─
+function renderAdminEvents(){
+  const list = document.getElementById('admin-events-list');
+  list.innerHTML = D.events.map((e,i)=>`<div class="nal">
+    <div class="evd" style="margin:0;"><div class="evday">${e.day}</div><div class="evmon">${e.mon}</div></div>
+    <div class="nal-info"><div class="nal-t">${e.title}</div><div class="nal-m">${e.desc}</div></div>
+    <button class="btn btn-r btn-xs" onclick="deleteEvent(${i})">🗑️</button>
+  </div>`).join('')||'<div class="empty">Нет событий</div>';
+}
+function addEvent(){
+  const title=document.getElementById('ev-title').value.trim();
+  const desc=document.getElementById('ev-desc').value.trim();
+  const day=document.getElementById('ev-day').value;
+  const mon=document.getElementById('ev-mon').value.trim().toUpperCase();
+  if(!title||!day||!mon){toast('❌','Ошибка','Заполните обязательные поля');return;}
+  D.events.push({day,mon,title,desc});
+  save('events');
+  ['ev-title','ev-desc','ev-day','ev-mon'].forEach(id=>document.getElementById(id).value='');
+  renderAdminEvents();
+  toast('✅','Событие добавлено','');
+}
+function deleteEvent(i){
+  D.events.splice(i,1);
+  save('events');
+  renderAdminEvents();
+  toast('🗑️','Удалено','');
+}
+
+// ─ Admin Banlist ─
+function renderAdminBanlist(){
+  const tb = document.getElementById('admin-ban-body');
+  tb.innerHTML = D.bans.map((b,i)=>`<tr>
+    <td><strong>${b.nick}</strong></td>
+    <td style="color:var(--muted)">${b.reason}</td>
+    <td style="color:var(--muted)">${b.date}</td>
+    <td style="color:${b.until==='Перманентно'?'#f87171':'var(--text)'}">${b.until}</td>
+    <td style="color:var(--muted)">${b.by}</td>
+    <td><button class="btn btn-gr btn-xs" onclick="removeBan(${i})">✅ Разбан</button></td>
+  </tr>`).join('')||'<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:20px;">Банлист пуст</td></tr>';
+}
+function addBan(){
+  if(!canDo('manageBans')){toast('❌','Нет доступа','Только Модераторы и выше');return;}
+  const reason=document.getElementById('ban-reason').value.trim();
+  const until=document.getElementById('ban-until').value.trim()||'Перманентно';
+  const by=document.getElementById('ban-by').value.trim()||currentUser.nick;
+  if(!nick||!reason){toast('❌','Ошибка','Укажите никнейм и причину');return;}
+  const now=new Date();
+  D.bans.push({nick,reason,date:now.toLocaleDateString('ru-RU',{day:'2-digit',month:'2-digit',year:'numeric'}),until,by});
+  const u = D.users.find(x=>x.nick===nick);
+  if(u){u.role='banned';save('users');}
+  save('bans');
+  addLog('ban','🚫','Выдан бан: '+nick+' ('+reason+')', currentUser.nick, '🚫');
+  ['ban-nick','ban-reason','ban-until','ban-by'].forEach(id=>document.getElementById(id).value='');
+  renderAdminBanlist();
+  renderAdminStats();
+  toast('🚫','Игрок заблокирован',nick);
+}
+function removeBan(i){
+  const b = D.bans[i];
+  const u = D.users.find(x=>x.nick===b.nick);
+  if(u&&u.role==='banned'){u.role='user';save('users');}
+  D.bans.splice(i,1);
+  save('bans');
+  addLog('ban','✅','Снят бан: '+b.nick, currentUser.nick, '✅');
+  renderAdminBanlist();
+  toast('✅','Бан снят','');
+}
+
+// ─ Admin Design ─
+function renderAdminDesign(){
+  document.getElementById('color-gold').value = D.design.gold;
+  document.getElementById('color-red').value = D.design.red;
+  document.getElementById('color-accent').value = D.design.accent;
+  document.getElementById('design-slogan').value = D.design.slogan;
+  document.getElementById('design-copy').value = D.design.copy;
+}
+function previewColor(which, val){
+  const map = {gold:'--gold',red:'--red',accent:'--accent'};
+  if(map[which]) document.documentElement.style.setProperty(map[which], val);
+}
+function saveDesign(){
+  D.design.gold = document.getElementById('color-gold').value;
+  D.design.red = document.getElementById('color-red').value;
+  D.design.accent = document.getElementById('color-accent').value;
+  D.design.slogan = document.getElementById('design-slogan').value;
+  D.design.copy = document.getElementById('design-copy').value;
+  save('design');
+  applyDesign();
+  document.getElementById('hero-sub').textContent = D.design.slogan;
+  document.getElementById('footer-copy').textContent = D.design.copy;
+  const m=document.getElementById('design-msg');m.style.display='block';setTimeout(()=>m.style.display='none',3000);
+  toast('🎨','Дизайн применён','Изменения сохранены');
+}
+
+// ════════════════════
+init();
+</script>
+</body>
+</html>
